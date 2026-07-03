@@ -1,0 +1,1033 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Microfinance Officielle - Demande de prêt & Activation immédiate</title>
+  <style>
+    /* Placeholder to keep editor stable */
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+:root{
+      --bg:#f0eded;
+      --card: rgba(10,60,120,.06);
+      --card2: rgba(10,60,120,.04);
+      --text:#111111cd;
+      --card: rgba(255,255,255,.08);
+      --card2: rgba(255,255,255,.06);
+      --text:#121213;
+      --muted: rgba(12, 12, 12, 0.72);
+      --brand:#2dd4bf;
+      --brand2:#60a5fa;
+      --danger:#fb7185;
+      --ok:#34d399;
+      --border: rgba(255,255,255,.14);
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:#000;
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(240, 243, 242, 0.35), transparent 60%),
+        radial-gradient(1000px 500px at 95% 0%, rgba(96,165,250,.35), transparent 55%),
+        radial-gradient(900px 520px at 50% 100%, rgba(45,212,191,.18), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+
+    .wrap{ max-width:1100px; margin:0 auto; padding:22px; }
+
+    header{
+      display:flex; gap:18px; align-items:center; justify-content:space-between;
+      margin-bottom:16px;
+    }
+
+    .brand{
+      display:flex; gap:14px; align-items:center;
+    }
+
+    .logo{
+      width:64px; height:64px; border-radius:16px;
+      background:linear-gradient(135deg, rgba(45,212,191,.85), rgba(96,165,250,.85));
+      display:flex; align-items:center; justify-content:center;
+      box-shadow: 0 15px 35px rgba(45,212,191,.25);
+      border:1px solid rgba(255,255,255,.22);
+    }
+    .logo svg{ width:38px; height:38px; }
+
+    .brand h1{ margin:0; font-size:18px; letter-spacing:.2px; }
+    .brand p{ margin:2px 0 0; color:var(--muted); font-size:13px; }
+
+    .pillbar{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    .pill{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.06);
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:13px;
+      color:var(--muted);
+      backdrop-filter: blur(10px);
+    }
+    .pill strong{ color:var(--text); font-weight:700; }
+
+    .grid{ display:grid; grid-template-columns: 1.15fr .85fr; gap:18px; }
+    @media (max-width: 980px){ .grid{ grid-template-columns:1fr; } header{ align-items:flex-start; flex-direction:column; } .pillbar{ justify-content:flex-start; } }
+
+    /* Right panel collapsible (as requested) */
+    .rightToggleBar{ display:flex; justify-content:flex-end; }
+    .rightToggleBtn{
+      position:sticky;
+      top:12px;
+      z-index:5;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,.20);
+      padding:10px 12px;
+      border-radius:14px;
+      font-weight:800;
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      user-select:none;
+    }
+    .rightPanelWrap{ position:relative; }
+    #rightPanelCollapse{ transition: max-height .25s ease; overflow:hidden; }
+    #rightPanelCollapse.isClosed{ max-height:0px; }
+    #rightPanelCollapse.isOpen{ max-height:1200px; }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .hero{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      position:relative;
+    }
+
+    .photoTop{
+      width:100%;
+      height:210px;
+      border-bottom:1px solid var(--border);
+      background:
+        radial-gradient(1000px 300px at 25% 0%, rgba(45,212,191,.45), transparent 55%),
+        linear-gradient(135deg, rgba(96,165,250,.35), rgba(45,212,191,.15)),
+        url('./IMG-20260622-WA0035.jpg');
+      background-size:cover;
+      background-position:center;
+      filter:saturate(1.08);
+    }
+
+    .hero h2{ margin:0; font-size:20px; }
+    .hero p{ margin:0; color:var(--muted); }
+
+    .steps{
+      display:grid; grid-template-columns:1fr 1fr; gap:12px;
+    }
+    @media (max-width: 540px){ .steps{ grid-template-columns:1fr; } }
+    .step{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:14px;
+      padding:12px;
+    }
+    .step .k{ font-weight:700; color:var(--text); }
+    .step .d{ color:var(--muted); font-size:13px; margin-top:4px; }
+
+    form{ padding:18px; }
+
+    .sectionTitle{
+      margin:0 0 10px;
+      font-size:15px;
+      color:var(--muted);
+      letter-spacing:.2px;
+    }
+
+    .formGrid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    @media (max-width: 720px){ .formGrid{ grid-template-columns:1fr; } }
+
+    label{ font-size:13px; color:var(--muted); display:block; margin-bottom:6px; }
+
+    input,select,textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(10,16,30,.35);
+      color: var(--text);
+      outline:none;
+      transition: border-color .15s ease, transform .05s ease;
+    }
+    textarea{ min-height:92px; resize:vertical; }
+
+    input:focus,select:focus,textarea:focus{
+      border-color: rgba(45,212,191,.65);
+    }
+
+    .full{ grid-column: 1 / -1; }
+
+    .actions{
+      display:flex; gap:12px; align-items:center; justify-content:space-between;
+      margin-top:14px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      cursor:pointer;
+      border:none;
+      padding:12px 16px;
+      border-radius:14px;
+      font-weight:700;
+      color: #001018;
+      background: linear-gradient(135deg, rgba(45,212,191,1), rgba(96,165,250,1));
+      box-shadow: 0 18px 35px rgba(45,212,191,.18);
+    }
+    .btn:disabled{ opacity:.55; cursor:not-allowed; }
+
+    .btnSecondary{
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,.20);
+      padding:12px 16px;
+      border-radius:14px;
+      font-weight:700;
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+    }
+
+    .notice{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .side{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .side h3{ margin:0; font-size:16px; }
+    .side .muted{ color:var(--muted); font-size:13px; }
+
+    .miniList{ display:flex; flex-direction:column; gap:10px; }
+    .miniItem{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:14px;
+      padding:12px;
+    }
+    .miniItem .t{ font-weight:700; }
+    .miniItem .s{ color:var(--muted); font-size:13px; margin-top:4px; }
+
+    .whatsapp{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(45,212,191,.35);
+      background: rgba(45,212,191,.08);
+    }
+    .waLeft{ display:flex; flex-direction:column; gap:2px; }
+    .waLeft .h{ font-weight:800; }
+    .waLeft .p{ color:var(--muted); font-size:13px; }
+
+    .waBtn{
+      background: rgba(45,212,191,.18);
+      border:1px solid rgba(45,212,191,.45);
+      color: var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    footer{
+      margin-top:16px;
+      color: rgba(234,240,255,.58);
+      font-size:12px;
+      text-align:center;
+      padding:18px 0 10px;
+    }
+
+    .toast{
+      position:fixed;
+      right:16px;
+      top:16px;
+      z-index:50;
+      background: rgba(16,24,40,.92);
+      border:1px solid rgba(255,255,255,.16);
+      border-radius: 14px;
+      padding:12px 14px;
+      max-width: 420px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.5);
+      display:none;
+    }
+    .toast .title{ font-weight:800; }
+    .toast .msg{ color: var(--muted); font-size:13px; margin-top:4px; }
+    .toast.ok{ border-color: rgba(52,211,153,.45); }
+    .toast.err{ border-color: rgba(251,113,133,.5); }
+    .toast.show{ display:block; }
+
+    /* Admin */
+    .hidden{ display:none; }
+  </style>
+</head>
+<body>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div class="wrap" id="publicView">
+    <header>
+      <div class="brand">
+
+
+        <div class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Z" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/>
+            <path d="M8.3 15.2c.8.9 2 1.6 3.7 1.6 2.3 0 3.8-1.2 3.8-3 0-1.6-1.2-2.4-3-2.7l-1.5-.3c-.9-.2-1.5-.6-1.5-1.3 0-.8.7-1.4 1.9-1.4 1 0 1.8.4 2.4 1.1" stroke="rgba(0,0,0,.35)" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Microfinance Officielle</h1>
+          <p>Demande de prêt • Traitement rapide • Dossier activé immédiatement</p>
+        </div>
+      </div>
+
+      <div class="pillbar">
+        <div class="pill">Délai estimé : <strong>24h</strong></div>
+        <div class="pill">Confidentialité : <strong>assurée</strong></div>
+        <div class="pill">Portail : <strong>sécurisé</strong></div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card" aria-label="Formulaire de demande">
+        <div class="photoTop" aria-hidden="true"></div>
+
+        <div style="padding:0 18px; margin-top:-6px;">
+          <div style="text-align:center; font-weight:1000; font-size:28px; color:#000; letter-spacing:.2px; line-height:1.1;">Microfinance Officielle</div>
+          <div style="text-align:center; margin-top:6px; color:#000; opacity:.75; font-size:13px; line-height:1.35;">Bienvenue dans notre plateforme sécurisée. Remplissez le questionnaire et activez votre dossier de crédit immédiatement.</div>
+
+          <div style="margin-top:12px; display:flex; justify-content:center;">
+            <img
+              src="./IMG-20260622-WA0034.jpg"
+              alt="Photo de présentation"
+              style="width:92%; max-width:520px; height:auto; border-radius:14px; border:1px solid rgba(0,0,0,.08);"
+            />
+          </div>
+        </div>
+
+          <div class="hero">
+            <h2 style="margin:0 0 6px; font-size:18px; color:var(--text);">Informations personnelles</h2>
+          <p>Remplissez le formulaire avec un email actif. Une fois soumis, vous recevrez un suivi via WhatsApp.</p>
+          <div class="steps">
+            <div class="step">
+              <div class="k">1) Données personnelles</div>
+              <div class="d">Infos d’identité et contact.</div>
+            </div>
+            <div class="step">
+              <div class="k">2) Projet & capacité</div>
+              <div class="d">Objectif du prêt et situation.</div>
+            </div>
+          </div>
+        </div>
+
+        <form id="loanForm">
+          <p class="sectionTitle">Informations utilisateur</p>
+
+          <div id="formSteps" class="formSteps">
+            <!-- Page 1 -->
+            <div class="formPage" data-page="1">
+              <div class="formGrid">
+                <div class="full">
+                  <label for="email">Email (identification) (obligatoire)</label>
+                  <input id="email" name="email" type="email" required autocomplete="email" />
+                </div>
+
+                <div class="full">
+                  <label for="fullName">Quel est votre nom complet ? (obligatoire)</label>
+                  <input id="fullName" name="fullName" type="text" required placeholder="Nom et prénom" />
+                </div>
+
+                <div class="full">
+                  <label for="birthDate">Quelle est votre date de naissance ? (obligatoire)</label>
+                  <input id="birthDate" name="birthDate" type="date" required />
+                </div>
+
+                <div class="full">
+                  <label for="address">Où habitez-vous actuellement ? (obligatoire)</label>
+                  <input id="address" name="address" type="text" required placeholder="Quartier / Commune" />
+                </div>
+
+                <div class="full">
+                  <label for="phone">Quel est votre numéro de téléphone ? (obligatoire)</label>
+                  <input id="phone" name="phone" type="tel" required placeholder="Ex: +225..." />
+                </div>
+
+                <div class="full">
+                  <label for="idDoc">Pouvez-vous nous présenter un document personnel ou officiel pour confirmer votre identité ? (obligatoire)</label>
+                  <select id="idDoc" name="idDoc" required>
+                    <option value="CNI">CNI</option>
+                    <option value="Passeport">Passeport</option>
+                    <option value="Permis">Permis</option>
+                    <option value="Autre">Autre</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Page 2 -->
+            <div class="formPage hidden" data-page="2">
+              <div class="formGrid">
+                <div class="full">
+                  <h2 style="margin:14px 0 8px; font-size:18px; color:var(--text);">Situation professionnelle</h2>
+                  <div style="color:var(--muted); font-size:13px; line-height:1.35;">Merci de renseigner vos informations d’activité.</div>
+                </div>
+
+                <div class="full">
+                  <label for="job">Quel est votre emploi actuel ? (obligatoire)</label>
+                  <input id="job" name="job" type="text" required placeholder="Votre emploi / activité" />
+                </div>
+
+                <div class="full">
+                  <label for="jobType">Êtes-vous salarié, travailleur indépendant ou entrepreneur ? (obligatoire)</label>
+                  <select id="jobType" name="jobType" required>
+                    <option value="Salarié">Salarié</option>
+                    <option value="Travailleur indépendant">Travailleur indépendant</option>
+                    <option value="Entrepreneur">Entrepreneur</option>
+                  </select>
+                </div>
+
+                <div class="full">
+                  <label for="incomeMonthly">Quel est votre revenu mensuel moyen ? (obligatoire)</label>
+                  <select id="incomeMonthly" name="incomeMonthly" required>
+                    <option value="Moins de 100 000 FCFA">Moins de 100 000 FCFA</option>
+                    <option value="100 000 à 300 000 FCFA">100 000 à 300 000 FCFA</option>
+                    <option value="300 001 à 500 000 FCFA">300 001 à 500 000 FCFA</option>
+                    <option value="Plus de 500 000 FCFA">Plus de 500 000 FCFA</option>
+                  </select>
+                </div>
+
+                <div class="full">
+                  <label for="otherIncome">Disposez-vous d'une autre source de revenus ? (obligatoire)</label>
+                  <select id="otherIncome" name="otherIncome" required>
+                    <option value="Oui">Oui</option>
+                    <option value="Non">Non</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Page 3 -->
+            <div class="formPage hidden" data-page="3">
+              <div class="formGrid">
+                <div class="full">
+                  <h2 style="margin:14px 0 8px; font-size:18px; color:var(--text);">Objet du prêt</h2>
+                  <div style="color:var(--muted); font-size:13px; line-height:1.35;">Choisissez le montant et la durée souhaités.</div>
+                </div>
+
+                <div class="full">
+                  <label for="loanAmount">Quel montant souhaitez-vous emprunter ? (obligatoire)</label>
+                  <input id="loanAmount" name="loanAmount" type="number" required min="10000" placeholder="Ex: 500000" />
+                </div>
+
+                <div class="full">
+                  <label for="repaymentTerm">Dans combien de temps souhaitez-vous rembourser le prêt ? (obligatoire)</label>
+                  <select id="repaymentTerm" name="repaymentTerm" required>
+                    <option value="3 mois">3 mois</option>
+                    <option value="6 mois">6 mois</option>
+                    <option value="12 mois">12 mois</option>
+                    <option value="24 mois">24 mois</option>
+                  </select>
+                </div>
+
+                <div class="full">
+                  <label for="previousLoan">Avez-vous déjà obtenu un prêt auparavant ? (obligatoire)</label>
+                  <select id="previousLoan" name="previousLoan" required>
+                    <option value="Oui">Oui</option>
+                    <option value="Non">Non</option>
+                  </select>
+                </div>
+
+                <div class="full">
+                  <label for="purpose">Objet du prêt (résumé) (obligatoire)</label>
+                  <textarea id="purpose" name="purpose" required placeholder="Ex: stock, équipement, formation..."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Page 4 -->
+            <div class="formPage hidden" data-page="4">
+              <div class="formGrid">
+                <div class="full">
+                  <h2 style="margin:14px 0 8px; font-size:18px; color:var(--text);">Consentement</h2>
+                  <div style="color:var(--muted); font-size:13px; line-height:1.35;">Veuillez confirmer pour soumettre votre demande.</div>
+                </div>
+
+                <div class="full">
+                  <label for="agree">Consentement (obligatoire)</label>
+                  <select id="agree" name="agree" required>
+                    <option value="Oui">Oui, j’autorise le traitement de mon dossier</option>
+                    <option value="Non">Non</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <div class="notice" id="successNotice" style="margin-bottom:10px; display:none;">
+              <div style="font-weight:900; color:var(--text); font-size:18px;">🎉 Félicitations</div>
+              <div id="successUserLine" style="margin-top:6px; color:var(--muted); font-size:13px; white-space:pre-wrap;"></div>
+
+              <div style="margin-top:12px; font-weight:900; color:var(--text); font-size:15px;">Étape finale : Activation de votre compte</div>
+              <div style="margin-top:6px; color:var(--muted); font-size:13px; white-space:pre-wrap;">Pour valider définitivement votre inscription et débloquer l'accès à votre demande de prêt, vous devez procéder à l'activation de votre compte client.</div>
+
+              <div style="margin-top:10px; color:var(--muted); font-size:13px; line-height:1.35;">
+                <b>Informations affichées</b><br/>
+                Montant minimum : 20 000 FCFA<br/>
+                Frais de tenue de compte : Gratuit
+              </div>
+
+              <div style="margin-top:10px; color:var(--muted); font-size:13px; white-space:pre-wrap;" id="successWhatsappText">
+                🟢 POUR FINALISER ET ACTIVER VOTRE COMPTE :
+                <br/><br/>
+                Cliquez sur le lien ci-dessous. Il ouvrira directement une discussion sécurisée avec notre service client sur WhatsApp. Un agent vous expliquera comment procéder à votre dépôt en toute sécurité.
+                <br/><br/>
+                <a href="https://wa.me/639071042504?text=Bonjour" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:8px; padding:10px 14px; background: rgba(45,212,191,.18); border:1px solid rgba(45,212,191,.45); border-radius:12px; font-weight:900; color: var(--text);">Ouvrir le WhatsApp</a>
+
+              </div>
+            </div>
+
+            <div class="stepNav" style="display:flex; gap:12px; width:100%; justify-content:space-between; flex-wrap:wrap;">
+              <button class="btnSecondary" type="button" id="prevBtn" style="display:none;">Précédent</button>
+
+              <div style="display:flex; gap:12px; margin-left:auto;">
+                <button class="btnSecondary" type="button" id="nextBtn">Suivant</button>
+                <button class="btn" type="submit" id="submitBtn" style="display:none;">Soumettre</button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </section>
+
+      <aside class="card rightPanelWrap" aria-label="Informations">
+        <div class="rightToggleBar">
+          <button
+            id="rightToggleBtn"
+            class="rightToggleBtn"
+            type="button"
+            aria-controls="rightPanelCollapse"
+            aria-expanded="false"
+            onclick="toggleRightPanel()"
+            >
+            Voir les détails
+            <span id="rightToggleIcon" aria-hidden="true">▼</span>
+          </button>
+        </div>
+
+        <div id="rightPanelCollapse" class="rightPanelWrap" style="max-height:1200px;">
+          <div class="side">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+              <h3 style="margin:0; font-size:14px;">Activation dossier</h3>
+              <button class="btnSecondary" type="button" onclick="toggleRightDetails()" aria-expanded="false" id="rightDetailsBtn" style="padding:10px 12px; font-size:13px;">
+                Détails▼
+              </button>
+
+
+
+            </div>
+            <div class="muted">Après validation, un conseiller active votre crédit et vous guide pour les étapes suivantes.</div>
+
+            <div id="rightDetails" class="hidden">
+              <div class="miniList" style="border:1px solid rgba(255,255,255,.14); border-radius:16px; padding:12px; background: rgba(255,255,255,.03);">
+                <div class="miniItem">
+                  <div class="t">✅ Identification par email</div>
+                  <div class="s">Chaque utilisateur a un accès d’affichage (côté admin).</div>
+                </div>
+                <div class="miniItem">
+                  <div class="t">✅ Suivi via WhatsApp</div>
+                  <div class="s">Le lien ci-dessous redirige vers l’administrateur.</div>
+                </div>
+                <div class="miniItem">
+                  <div class="t">✅ Interface Admin</div>
+                  <div class="s">Protégée pour consulter les réponses soumises.</div>
+                </div>
+              </div>
+
+
+            <div class="whatsapp">
+              <div class="waLeft">
+                <div class="h">WhatsApp Administrateur</div>
+                <div class="p">Activation du dossier + assistance</div>
+              </div>
+              <a id="waLink" class="waBtn" target="_blank" rel="noopener noreferrer">Ouvrir le chat</a>
+            </div>
+
+
+            <div class="miniItem" style="border-color:rgba(96,165,250,.35); background: rgba(96,165,250,.07);">
+              <div class="t">Accès Administrateur</div>
+              <div class="s">Cliquez ci-dessous pour voir toutes les réponses.</div>
+              <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="btnSecondary" type="button" onclick="showAdmin()">Entrer Admin</button>
+                <button class="btnSecondary" type="button" onclick="clearLocalDemo()">Effacer démo</button>
+              </div>
+            </div>
+
+              <div class="muted" style="font-size:12px;">
+                Note : La consultation des réponses utilise un stockage local (démo). Pour un système 100% réel, une base de données côté serveur est requise.
+              </div>
+
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      © <span id="year"></span> Microfinance Officielle. Tous droits réservés.
+    </footer>
+  </div>
+
+  <!-- Admin view (single-page demo) -->
+  <div class="wrap hidden" id="adminView">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Z" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/>
+            <path d="M8.3 15.2c.8.9 2 1.6 3.7 1.6 2.3 0 3.8-1.2 3.8-3 0-1.6-1.2-2.4-3-2.7l-1.5-.3c-.9-.2-1.5-.6-1.5-1.3 0-.8.7-1.4 1.9-1.4 1 0 1.8.4 2.4 1.1" stroke="rgba(0,0,0,.35)" stroke-width="1.7" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Panel Administrateur</h1>
+          <p>Consultation des questionnaires</p>
+        </div>
+      </div>
+      <div class="pillbar">
+        <div class="pill">Accès : <strong>Restreint</strong></div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section class="card" style="grid-column:1 / -1;">
+        <form id="adminLogin" style="padding:18px;">
+          <p class="sectionTitle">Connexion administrateur</p>
+          <div class="formGrid">
+            <div class="full">
+              <label for="adminEmail">Email admin</label>
+              <input id="adminEmail" type="email" autocomplete="username" required />
+            </div>
+            <div class="full">
+              <label for="adminPass">Mot de passe</label>
+              <input id="adminPass" type="password" autocomplete="current-password" required />
+            </div>
+          </div>
+          <div class="actions">
+            <div class="notice">Les informations sont comparées côté navigateur (démo). Remplacez par une vraie auth serveur pour la production.</div>
+            <button class="btn" type="submit">Se connecter</button>
+          </div>
+        </form>
+
+        <div class="hero" id="adminArea" style="padding:0 18px 18px; display:none;">
+          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:12px; padding-top:14px;">
+            <div>
+              <h2 style="margin:0; font-size:18px;">Réponses des utilisateurs</h2>
+              <p style="margin:6px 0 0; color:var(--muted);">Cliquez sur une ligne pour voir le détail.</p>
+            </div>
+            <button class="btnSecondary" type="button" onclick="logoutAdmin()">Déconnexion</button>
+          </div>
+
+          <div style="margin-top:14px; display:grid; grid-template-columns: 1fr; gap:12px;">
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <input id="filterEmail" placeholder="Filtrer par email" style="flex:1; min-width:220px;" />
+              <button class="btnSecondary" type="button" onclick="renderResponses()">Actualiser</button>
+            </div>
+
+            <div style="border:1px solid rgba(255,255,255,.14); border-radius:16px; overflow:hidden; background: rgba(255,255,255,.04);">
+              <div style="display:grid; grid-template-columns: 1.2fr .8fr 1fr; gap:0; padding:12px 14px; border-bottom:1px solid rgba(255,255,255,.14); color:var(--muted); font-size:13px;">
+                <div><strong style="color:var(--text);">Email</strong></div>
+                <div><strong style="color:var(--text);">Téléphone</strong></div>
+                <div><strong style="color:var(--text);">Montant</strong></div>
+              </div>
+              <div id="responsesTable" style="max-height:380px; overflow:auto;">
+                <!-- rows -->
+              </div>
+            </div>
+
+            <div class="miniItem" style="background: rgba(255,255,255,.04);">
+              <div class="t" id="detailTitle">Détail</div>
+              <div class="s" id="detailBody" style="white-space:pre-wrap; margin-top:8px; color:var(--muted); font-size:13px;">Sélectionnez une réponse dans le tableau.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // WhatsApp admin number (demo): set your admin phone here (international format without '+')
+    // If you want it to open to a specific message, use &text=... in the URL.
+    const ADMIN_WA_PHONE = "639071042504"; // WhatsApp admin (format digits only)
+
+    // Admin credentials (from user request)
+    const ADMIN_EMAIL = "wabogeovani02@gmail.com";
+    const ADMIN_PASSWORD = "VaNeLlE@20";
+
+    const STORAGE_KEY = "microfinance_responses_v1";
+    const SESSION_ADMIN = "microfinance_admin_session_v1";
+
+    const $ = (sel) => document.querySelector(sel);
+
+    function showToast(title, msg, variant){
+      const t = $('#toast');
+      t.className = 'toast show ' + (variant || '');
+      t.style.color = '#ffffff';
+      t.innerHTML = `<div class="title" style="color:#ffffff;">${escapeHtml(title)}</div><div class="msg" style="color:#ffffff;">${escapeHtml(msg)}</div>`;
+
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(() => {
+        t.className = 'toast';
+      }, 3600);
+    }
+
+    function escapeHtml(str){
+      return String(str).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'<','>':'>','"':'"',"'":'&#39;'}[c]));
+    }
+
+    // WhatsApp link
+    (function(){
+      const wa = $('#waLink');
+      const url = `https://wa.me/${ADMIN_WA_PHONE}`;
+      wa.href = url;
+    })();
+
+    // Year
+    $('#year').textContent = new Date().getFullYear();
+
+    // Multi-page form
+    const form = $('#loanForm');
+    let currentPage = 1;
+
+    const formPages = Array.from(document.querySelectorAll('.formPage[data-page]'))
+      .sort((a,b)=> Number(a.dataset.page) - Number(b.dataset.page));
+
+    const prevBtn = $('#prevBtn');
+    const nextBtn = $('#nextBtn');
+    const submitBtn = $('#submitBtn');
+
+    const successNotice = $('#successNotice');
+    const successUserLine = $('#successUserLine');
+
+    function getPageByNumber(n){
+      return formPages.find(p => Number(p.dataset.page) === n);
+    }
+
+    function setPage(n){
+      currentPage = n;
+      for (const p of formPages){
+        const pn = Number(p.dataset.page);
+        p.classList.toggle('hidden', pn !== n);
+      }
+
+      if (prevBtn) prevBtn.style.display = n === 1 ? 'none' : 'inline-flex';
+      if (nextBtn) nextBtn.style.display = (n === 4) ? 'none' : 'inline-flex';
+      if (submitBtn) submitBtn.style.display = n === 4 ? 'inline-flex' : 'none';
+
+      // toggle aria-live / button labels
+      if (nextBtn && n < 4) nextBtn.textContent = 'Suivant';
+    }
+
+    function validateCurrentPage(){
+      const page = getPageByNumber(currentPage);
+      if (!page) return false;
+
+      // Find required fields within current page
+      const required = page.querySelectorAll('[required]');
+      let ok = true;
+
+      for (const el of required){
+        if (!el.value || String(el.value).trim() === ''){
+          ok = false;
+          el.focus();
+          showToast('Champs manquants', 'Veuillez remplir tous les champs obligatoires de cette page.', 'err');
+          break;
+        }
+      }
+      return ok;
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', ()=> setPage(Math.max(1, currentPage-1)));
+    if (nextBtn) nextBtn.addEventListener('click', ()=>{
+      if (!validateCurrentPage()) return;
+      setPage(Math.min(4, currentPage+1));
+    });
+
+    // Submit (only on page 4)
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+
+      const agree = $('#agree')?.value;
+      if (agree !== 'Oui'){
+        showToast('Consentement requis', 'Veuillez accepter le traitement de votre dossier.', 'err');
+        return;
+      }
+
+      if (currentPage !== 4){
+        showToast('Validation', 'Veuillez compléter toutes les pages avant de soumettre.', 'err');
+        return;
+      }
+
+      const data = Object.fromEntries(new FormData(form).entries());
+      const email = data.email?.trim();
+      if (!email){
+        showToast('Email manquant', 'Veuillez renseigner votre email.', 'err');
+        return;
+      }
+
+      const responses = loadResponses();
+      const existing = responses.find(r => (r.email || '').toLowerCase() === email.toLowerCase());
+
+      const record = {
+        id: cryptoRandomId(),
+        createdAt: new Date().toISOString(),
+        ...data,
+        email: email,
+        firstName: (data.fullName||'').trim() // naming for greeting
+      };
+
+      if (existing){
+        const idx = responses.indexOf(existing);
+        responses[idx] = record;
+      } else {
+        responses.push(record);
+      }
+
+      saveResponses(responses);
+
+      // Show congratulations AFTER submit and name
+      const name = (data.fullName||'').trim() || email;
+      if (successNotice) successNotice.style.display = 'block';
+      if (successUserLine) successUserLine.textContent = `Bonjour ${name} — votre demande a été enregistrée avec succès.`;
+
+      showToast('Demande envoyée', 'Votre questionnaire a été enregistré. L’administrateur peut maintenant activer votre dossier.', 'ok');
+    });
+
+    // Initialize
+    setPage(1);
+    if (successNotice) successNotice.style.display = 'none';
+
+
+
+    function loadResponses(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      }catch{ return []; }
+    }
+
+    function saveResponses(list){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    }
+
+    function cryptoRandomId(){
+      if (window.crypto && crypto.getRandomValues){
+        const bytes = new Uint8Array(16);
+        crypto.getRandomValues(bytes);
+        return Array.from(bytes).map(b => b.toString(16).padStart(2,'0')).join('');
+      }
+      return String(Date.now()) + '_' + Math.random().toString(16).slice(2);
+    }
+
+    // Admin view
+    function showAdmin(){
+      $('#publicView').classList.add('hidden');
+      $('#adminView').classList.remove('hidden');
+    }
+
+    function logoutAdmin(){
+      localStorage.removeItem(SESSION_ADMIN);
+      $('#adminArea').style.display = 'none';
+      $('#adminLogin').reset();
+      showToast('Déconnexion', 'Session administrateur terminée.', 'ok');
+    }
+
+    const adminLogin = $('#adminLogin');
+    adminLogin.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = $('#adminEmail').value.trim();
+      const pass = $('#adminPass').value;
+
+      if (email.toLowerCase() === ADMIN_EMAIL.toLowerCase() && pass === ADMIN_PASSWORD){
+        localStorage.setItem(SESSION_ADMIN, '1');
+        $('#adminArea').style.display = 'block';
+        // hide login fields? keep simple.
+        showToast('Accès autorisé', 'Bienvenue sur le panel administrateur.', 'ok');
+        renderResponses();
+      } else {
+        showToast('Accès refusé', 'Identifiants admin incorrects.', 'err');
+      }
+    });
+
+    function ensureAdminSession(){
+      return localStorage.getItem(SESSION_ADMIN) === '1';
+    }
+
+    function renderResponses(){
+      if (!ensureAdminSession()) return;
+      const list = loadResponses().sort((a,b)=> new Date(b.createdAt)-new Date(a.createdAt));
+      const filter = ($('#filterEmail').value || '').trim().toLowerCase();
+      const filtered = filter ? list.filter(r => (r.email||'').toLowerCase().includes(filter)) : list;
+
+      const table = $('#responsesTable');
+      table.innerHTML = '';
+
+      if (filtered.length === 0){
+        table.innerHTML = `<div style="padding:14px; color:var(--muted);">Aucune réponse enregistrée.</div>`;
+        $('#detailTitle').textContent = 'Détail';
+        $('#detailBody').textContent = 'Sélectionnez une réponse dans le tableau.';
+        return;
+      }
+
+      for (const r of filtered){
+        const amount = r.loanAmount || '';
+        const row = document.createElement('div');
+        row.style.cssText = `display:grid; grid-template-columns: 1.2fr .8fr 1fr; gap:0; padding:12px 14px; border-bottom:1px solid rgba(255,255,255,.08); cursor:pointer;`;
+        row.innerHTML = `
+          <div style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(r.email||'')}</div>
+          <div style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(r.phone||'')}</div>
+          <div style="font-weight:800; color: rgba(234,240,255,.95);">${escapeHtml(amount)} FCFA</div>
+        `;
+        row.addEventListener('click', ()=>{
+          const name = [r.firstName, r.lastName].filter(Boolean).join(' ');
+          $('#detailTitle').textContent = `Détail : ${name || r.email}`;
+          $('#detailBody').textContent = toDetailText(r);
+        });
+        table.appendChild(row);
+      }
+    }
+
+    function toDetailText(r){
+      const lines = [
+        `Email : ${r.email || '-'}`,
+        `Nom complet : ${(r.firstName||'') + ' ' + (r.lastName||'')}`.trim(),
+        `Téléphone : ${r.phone || '-'}`,
+        `Ville : ${r.city || '-'}`,
+        `Pays : ${r.country || '-'}`,
+        `Âge : ${r.age || '-'}`,
+        `Statut matrimonial : ${r.marital || '-'}`,
+        `Profession/Activité : ${r.job || '-'}`,
+        `Revenu mensuel : ${r.monthlyIncome || '-'} FCFA`,
+        `Montant demandé : ${r.loanAmount || '-'} FCFA`,
+        `Objet du prêt : ${r.purpose || '-'}`,
+        `Type remboursement : ${r.repayment || '-'}`,
+        `Pièce d’identité : ${r.idType || '-'} - N°: ${r.idNumber || '-'}`,
+        `Soumis le : ${r.createdAt || '-'}`
+      ];
+      return lines.join('\n');
+    }
+
+    $('#filterEmail').addEventListener('input', ()=>{
+      renderResponses();
+    });
+
+    function toggleRightDetails(){
+
+
+      const wrap = document.getElementById('rightDetails');
+      const btn = document.getElementById('rightDetailsBtn');
+      if (!wrap || !btn) return;
+      const isHidden = wrap.classList.contains('hidden');
+      wrap.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', String(isHidden));
+      btn.textContent = isHidden ? 'Masquer les détails' : 'Voir les détails';
+    }
+
+    // Right panel collapse
+    function toggleRightPanel(){
+
+      const panel = document.getElementById('rightPanelCollapse');
+      const btn = document.getElementById('rightToggleBtn');
+      const icon = document.getElementById('rightToggleIcon');
+      if (!panel || !btn) return;
+
+      const closed = panel.classList.toggle('isClosed');
+      panel.classList.toggle('isOpen', !closed);
+
+      // if closed => max-height via isClosed; if open => via isOpen
+      if (closed){
+        panel.classList.add('isClosed');
+        panel.classList.remove('isOpen');
+        btn.setAttribute('aria-expanded','false');
+        if (icon) icon.textContent = '▶';
+      } else {
+        panel.classList.remove('isClosed');
+        panel.classList.add('isOpen');
+        btn.setAttribute('aria-expanded','true');
+        if (icon) icon.textContent = '▼';
+      }
+    }
+
+    // init right panel state (open by default)
+    (function(){
+      const panel = document.getElementById('rightPanelCollapse');
+      const btn = document.getElementById('rightToggleBtn');
+      const icon = document.getElementById('rightToggleIcon');
+      if (!panel) return;
+      panel.classList.add('isOpen');
+      panel.classList.remove('isClosed');
+      if (btn) btn.setAttribute('aria-expanded','true');
+      if (icon) icon.textContent = '▼';
+    })();
+
+    // Clear demo
+    function clearLocalDemo(){
+      localStorage.removeItem(STORAGE_KEY);
+      showToast('Effacé', 'Les réponses enregistrées (démo) ont été supprimées.', 'ok');
+      if (ensureAdminSession()) renderResponses();
+    }
+
+    // Auto-open admin area if already logged in
+    (function(){
+      const s = ensureAdminSession();
+      if (s){
+        // If user opens admin directly, show admin view.
+        // We'll detect by checking hash.
+        if (location.hash === '#admin'){
+          showAdmin();
+          $('#adminArea').style.display = 'block';
+          renderResponses();
+        }
+      }
+    })();
+
+    // Expose globals
+    window.showAdmin = showAdmin;
+    window.clearLocalDemo = clearLocalDemo;
+    window.logoutAdmin = logoutAdmin;
+    window.renderResponses = renderResponses;
+
+    // If hash is admin, open admin immediately
+    if (location.hash === '#admin'){
+      showAdmin();
+    }
+  </script>
+</body>
+</html>
+
