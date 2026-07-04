@@ -711,7 +711,29 @@
       return String(str).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'<','>':'>','"':'"',"'":'&#39;'}[c]));
     }
 
+    function escapeAttr(str){
+      // For href/attribute context: reuse HTML escaping but keep it simple
+      return escapeHtml(str);
+    }
+
+    function buildUserEmailLink(email){
+      const e = String(email || '').trim();
+      if (!e) return '#';
+
+      // Uses the user's email client (mailto) and pre-fills subject/body so the admin can continue the conversation.
+      const subject = 'Microfinance Officielle — Suivi de votre demande';
+      const body = 'Bonjour,\n\nNous avons bien reçu votre demande. Pour continuer la conversation, veuillez répondre directement à ce message.\n\nMerci.';
+
+      const params = new URLSearchParams({
+        subject: subject,
+        body: body
+      });
+
+      return `https://mail.google.com/mail/?${params.toString()}`;
+    }
+
     // WhatsApp link
+
     (function(){
       const wa = $('#waLink');
       const url = `https://wa.me/${ADMIN_WA_PHONE}`;
@@ -909,15 +931,26 @@
         const amount = r.loanAmount || '';
         const row = document.createElement('div');
         row.style.cssText = `display:grid; grid-template-columns: 1.2fr .8fr 1fr; gap:0; padding:12px 14px; border-bottom:1px solid rgba(255,255,255,.08); cursor:pointer;`;
+        const email = r.email || '';
+        const emailHref = buildUserEmailLink(email);
         row.innerHTML = `
-          <div style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(r.email||'')}</div>
+          <div style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+            <a href="${escapeAttr(emailHref)}" target="_blank" rel="noopener noreferrer" class="admin-email-link" data-email="${escapeAttr(email)}" style="text-decoration:underline; font-weight:800; color: var(--text);">
+              ${escapeHtml(email)}
+            </a>
+          </div>
           <div style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(r.phone||'')}</div>
           <div style="font-weight:800; color: rgba(234,240,255,.95);">${escapeHtml(amount)} FCFA</div>
         `;
-        row.addEventListener('click', ()=>{
+
+        // Click on row => detail, but clicking the email link opens email without triggering row detail
+        row.addEventListener('click', (ev)=>{
           const name = [r.firstName, r.lastName].filter(Boolean).join(' ');
           $('#detailTitle').textContent = `Détail : ${name || r.email}`;
           $('#detailBody').textContent = toDetailText(r);
+        });
+        row.querySelector('.admin-email-link')?.addEventListener('click', (ev)=>{
+          ev.stopPropagation();
         });
         table.appendChild(row);
       }
