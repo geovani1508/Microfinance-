@@ -381,13 +381,25 @@
                 </div>
 
                 <div class="full">
-                  <label for="idDoc">Pouvez-vous nous présenter un document personnel ou officiel pour confirmer votre identité ? (obligatoire)</label>
+                  <label for="idDoc">Type de document (obligatoire)</label>
                   <select id="idDoc" name="idDoc" required>
                     <option value="CNI">CNI</option>
                     <option value="Passeport">Passeport</option>
                     <option value="Permis">Permis</option>
                     <option value="Autre">Autre</option>
                   </select>
+                </div>
+
+                <div class="full">
+                  <label for="idDocFile">Import du document d’identité (PDF/JPG/PNG) (obligatoire)</label>
+                  <input
+                    id="idDocFile"
+                    name="idDocFile"
+                    type="file"
+                    accept="application/pdf,image/png,image/jpeg"
+                    required
+                  />
+                  <div class="notice" id="idDocFileName" style="margin-top:6px; color:var(--muted); font-size:13px;"></div>
                 </div>
               </div>
             </div>
@@ -785,6 +797,18 @@
       let ok = true;
 
       for (const el of required){
+        // Special handling for <input type="file"> because el.value may be empty string.
+        if (el.type === 'file'){
+          const files = el.files || [];
+          if (!files.length){
+            ok = false;
+            el.focus();
+            showToast('Pièce manquante', 'Veuillez importer votre document d’identité pour continuer.', 'err');
+            break;
+          }
+          continue;
+        }
+
         if (!el.value || String(el.value).trim() === ''){
           ok = false;
           el.focus();
@@ -794,6 +818,7 @@
       }
       return ok;
     }
+
 
     if (prevBtn) prevBtn.addEventListener('click', ()=> setPage(Math.max(1, currentPage-1)));
     if (nextBtn) nextBtn.addEventListener('click', ()=>{
@@ -816,6 +841,9 @@
         return;
       }
 
+      const idDocFileEl = $('#idDocFile');
+      const idDocFile = idDocFileEl?.files?.[0];
+
       const data = Object.fromEntries(new FormData(form).entries());
       const email = data.email?.trim();
       if (!email){
@@ -823,33 +851,58 @@
         return;
       }
 
-      const responses = loadResponses();
-      const existing = responses.find(r => (r.email || '').toLowerCase() === email.toLowerCase());
+      if (!idDocFile){
+        showToast('Pièce manquante', 'Veuillez importer votre document d’identité.', 'err');
+        return;
+      }
 
+      // Convert file -> Base64 so we can store it in localStorage (demo).
+      const reader = new FileReader();
+      reader.onload = ()=>{
+        const base64DataUrl = String(reader.result || ''); // e.g. data:application/pdf;base64,....
+        const record = buildRecordWithFile({ data, email, idDocFile, base64DataUrl });
+
+        const responses = loadResponses();
+        const existing = responses.find(r => (r.email || '').toLowerCase() === email.toLowerCase());
+
+        if (existing){
+          const idx = responses.indexOf(existing);
+          responses[idx] = record;
+        } else {
+          responses.push(record);
+        }
+
+        saveResponses(responses);
+
+        const name = (data.fullName||'').trim() || email;
+        if (successNotice) successNotice.style.display = 'block';
+        if (successUserLine) successUserLine.textContent = `Bonjour ${name} — votre demande a été enregistrée avec succès.`;
+
+        showToast('Demande envoyée', 'Votre questionnaire a été enregistré. L’administrateur peut maintenant activer votre dossier.', 'ok');
+      };
+
+      reader.onerror = ()=>{
+        showToast('Erreur fichier', 'Impossible de lire le document. Veuillez réessayer.', 'err');
+      };
+
+      reader.readAsDataURL(idDocFile);
+    });
+
+    function buildRecordWithFile({ data, email, idDocFile, base64DataUrl }){
       const record = {
         id: cryptoRandomId(),
         createdAt: new Date().toISOString(),
         ...data,
         email: email,
-        firstName: (data.fullName||'').trim() // naming for greeting
+        firstName: (data.fullName||'').trim(),
+
+        idDocFileName: idDocFile?.name || '',
+        idDocFileMime: idDocFile?.type || '',
+        idDocFileBase64: base64DataUrl || ''
       };
+      return record;
+    }
 
-      if (existing){
-        const idx = responses.indexOf(existing);
-        responses[idx] = record;
-      } else {
-        responses.push(record);
-      }
-
-      saveResponses(responses);
-
-      // Show congratulations AFTER submit and name
-      const name = (data.fullName||'').trim() || email;
-      if (successNotice) successNotice.style.display = 'block';
-      if (successUserLine) successUserLine.textContent = `Bonjour ${name} — votre demande a été enregistrée avec succès.`;
-
-      showToast('Demande envoyée', 'Votre questionnaire a été enregistré. L’administrateur peut maintenant activer votre dossier.', 'ok');
-    });
 
     // Initialize
     setPage(1);
@@ -947,8 +1000,40 @@
         row.addEventListener('click', (ev)=>{
           const name = [r.firstName, r.lastName].filter(Boolean).join(' ');
           $('#detailTitle').textContent = `Détail : ${name || r.email}`;
-          $('#detailBody').textContent = toDetailText(r);
+          const body = $('#detailBody');
+          if (body){
+            const text = toDetailText(r);
+            const base64 = r.idDocFileBase64 || '';
+            const fileName = r.idDocFileName || '';
+            const mime = r.idDocFileMime || '';
+            if (!base64){
+              body.textContent = text;
+            } else {
+              const safeFileName = escapeHtml(fileName);
+              const previewHtml = (mime && mime.startsWith('image/'))
+                ? `<div style="margin-top:10px;">
+                     <div style="font-weight:900; color:var(--text);">Aperçu document</div>
+                     <div style="margin-top:6px;">
+                       <img src="${base64}" alt="${safeFileName}" style="max-width:100%; border-radius:12px; border:1px solid rgba(255,255,255,.14);" />
+                     </div>
+                     <div style="color:var(--muted); font-size:13px; margin-top:6px;">${safeFileName}</div>
+                   </div>`
+                : `<div style="margin-top:10px;">
+                     <div style="font-weight:900; color:var(--text);">Document</div>
+                     <div style="margin-top:8px;">
+                       <iframe src="${base64}" style="width:100%; height:420px; border:1px solid rgba(255,255,255,.14); border-radius:12px; background:rgba(0,0,0,.08);" title="${safeFileName}"></iframe>
+                     </div>
+                     <div style="color:var(--muted); font-size:13px; margin-top:6px;">${safeFileName}</div>
+                   </div>`;
+              body.innerHTML = `
+                <pre style="white-space:pre-wrap; margin:0; color:var(--muted); font-size:13px;">${escapeHtml(text)}</pre>
+                ${previewHtml}
+              `;
+            }
+          }
         });
+
+
         row.querySelector('.admin-email-link')?.addEventListener('click', (ev)=>{
           ev.stopPropagation();
         });
@@ -970,8 +1055,10 @@
         `Montant demandé : ${r.loanAmount || '-'} FCFA`,
         `Objet du prêt : ${r.purpose || '-'}`,
         `Type remboursement : ${r.repayment || '-'}`,
-        `Pièce d’identité : ${r.idType || '-'} - N°: ${r.idNumber || '-'}`,
+        `Type de document : ${r.idDoc || '-'}`,
+        `Document importé : ${r.idDocFileName || '-'}`,
         `Soumis le : ${r.createdAt || '-'}`
+
       ];
       return lines.join('\n');
     }
