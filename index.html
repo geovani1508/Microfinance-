@@ -698,12 +698,11 @@
     // If you want it to open to a specific message, use &text=... in the URL.
     const ADMIN_WA_PHONE = "639071042504"; // WhatsApp admin (format digits only)
 
-    // Admin credentials (from user request)
-    const ADMIN_EMAIL = "wabogeovani02@gmail.com";
-    const ADMIN_PASSWORD = "VaNeLlE@20";
-
+    const API_BASE = ''; // empty = same origin (Vercel)
     const STORAGE_KEY = "microfinance_responses_v1";
     const SESSION_ADMIN = "microfinance_admin_session_v1";
+    const DEMO_EMAIL = "wabogeovani02@gmail.com";
+    const DEMO_PASS = "VaNeLlE@20";
 
     const $ = (sel) => document.querySelector(sel);
 
@@ -874,6 +873,13 @@
 
         saveResponses(responses);
 
+        // Try sending to API
+        fetch(API_BASE + '/api/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(record)
+        }).catch(() => {});
+
         const name = (data.fullName||'').trim() || email;
         if (successNotice) successNotice.style.display = 'block';
         if (successUserLine) successUserLine.textContent = `Bonjour ${name} — votre demande a été enregistrée avec succès.`;
@@ -949,7 +955,7 @@
       const email = $('#adminEmail').value.trim();
       const pass = $('#adminPass').value;
 
-      if (email.toLowerCase() === ADMIN_EMAIL.toLowerCase() && pass === ADMIN_PASSWORD){
+      if (email.toLowerCase() === DEMO_EMAIL.toLowerCase() && pass === DEMO_PASS){
         localStorage.setItem(SESSION_ADMIN, '1');
         $('#adminArea').style.display = 'block';
         // hide login fields? keep simple.
