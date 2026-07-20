@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Microfinance Officielle - Demande de prêt</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Microfinance Officielle - Demande de prêt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
 :root{--bg:#f0eded;--card:rgba(255,255,255,.08);--text:#121213;--muted:rgba(12,12,12,0.72);--brand:#2dd4bf;--brand2:#60a5fa;--danger:#fb7185;--ok:#34d399;--border:rgba(255,255,255,.14);--shadow:0 20px 60px rgba(0,0,0,.45);--radius:18px}
 *{box-sizing:border-box}html,body{height:100%;margin:0}
 body{font-family:Inter,sans-serif;color:var(--text);background:radial-gradient(1200px 600px at 20% -10%,rgba(240,243,242,.35),transparent 60%),radial-gradient(1000px 500px at 95% 0%,rgba(96,165,250,.35),transparent 55%),radial-gradient(900px 520px at 50% 100%,rgba(45,212,191,.18),transparent 60%),var(--bg);line-height:1.5}
@@ -17,8 +17,7 @@ header{display:flex;gap:18px;align-items:center;justify-content:space-between;ma
 .logo{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,rgba(45,212,191,.85),rgba(96,165,250,.85));display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.22)}
 .logo svg{width:38px;height:38px}
 .brand h1{margin:0;font-size:18px}.brand p{margin:2px 0 0;color:var(--muted);font-size:13px}
-.pillbar{display:flex;gap:10px;flex-wrap:wrap}
-.pill{border:1px solid var(--border);background:rgba(255,255,255,.06);border-radius:999px;padding:8px 12px;font-size:13px;color:var(--muted)}
+.pillbar{display:flex;gap:10px;flex-wrap:wrap}.pill{border:1px solid var(--border);background:rgba(255,255,255,.06);border-radius:999px;padding:8px 12px;font-size:13px;color:var(--muted)}
 .pill strong{color:var(--text)}.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
 @media(max-width:980px){.grid{grid-template-columns:1fr}}
 .card{background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.05));border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
@@ -53,378 +52,203 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
 .toast.ok{border-color:rgba(52,211,153,.45)}.toast.err{border-color:rgba(251,113,133,.5)}.toast.show{display:block}
 .hidden{display:none}
 .toggleBtn{cursor:pointer;border:1px solid var(--border);background:rgba(255,255,255,.06);padding:8px 14px;border-radius:10px;color:var(--text);font-weight:700;font-size:13px}
-#rightPanelCollapse{transition:max-height .25s ease;overflow:hidden}
-#rightPanelCollapse.isClosed{max-height:0}#rightPanelCollapse.isOpen{max-height:1200px}
+#rightPanelCollapse{transition:max-height .25s ease;overflow:hidden}#rightPanelCollapse.isClosed{max-height:0}#rightPanelCollapse.isOpen{max-height:1200px}
 .waBig{display:block;width:100%;margin-top:14px;padding:16px;background:rgba(45,212,191,.2);border:2px solid rgba(45,212,191,.5);border-radius:14px;font-weight:900;font-size:15px;color:var(--text);text-align:center;text-decoration:none}
 .waBig:hover{background:rgba(45,212,191,.35)}
 .adminRow{display:grid;grid-template-columns:1.2fr .8fr 1fr 70px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.08);cursor:pointer;align-items:center}
 .adminRow:hover{background:rgba(255,255,255,.05)}
-  </style>
+</style>
 </head>
 <body>
-
 <div id="toast" class="toast"></div>
-
 <div class="wrap" id="publicView">
-  <header>
-    <div class="brand">
-      <div class="logo" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Z" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/><path d="M8.3 15.2c.8.9 2 1.6 3.7 1.6 2.3 0 3.8-1.2 3.8-3 0-1.6-1.2-2.4-3-2.7l-1.5-.3c-.9-.2-1.5-.6-1.5-1.3 0-.8.7-1.4 1.9-1.4 1 0 1.8.4 2.4 1.1" stroke="rgba(0,0,0,.35)" stroke-width="1.7" stroke-linecap="round"/></svg>
-      </div>
-      <div><h1>Microfinance Officielle</h1><p>Demande de prêt • Traitement rapide</p></div>
-    <div class="pillbar">
-      <div class="pill">Délai : <strong>24h</strong></div>
-      <div class="pill">Confidentialité : <strong>assurée</strong></div>
-  </header>
-
-  <div class="grid">
-    <section class="card">
-      <div class="photoTop"></div>
-      <div style="padding:12px 18px 0;text-align:center">
-        <div style="font-weight:1000;font-size:26px">Microfinance Officielle</div>
-        <div style="margin-top:6px;color:#000;opacity:.75;font-size:13px">Bienvenue. Remplissez le questionnaire et activez votre dossier.</div>
-        <div style="margin-top:10px"><img src="./IMG-20260622-WA0034.jpg" style="width:90%;max-width:500px;border-radius:14px"></div>
-      <div class="hero" style="padding-bottom:0">
-        <h2 style="font-size:18px">Informations personnelles</h2>
-        <p>Remplissez le formulaire. Une fois soumis, activez votre dossier via WhatsApp.</p>
-        <div class="steps">
-          <div class="step"><div class="k">1) Données personnelles</div><div class="d">Infos d'identité et contact.</div>
-          <div class="step"><div class="k">2) Projet &amp; capacité</div><div class="d">Objectif du prêt.</div>
-        </div>
-      <form id="loanForm">
-        <p class="sectionTitle">Informations utilisateur</p>
-        <div id="formSteps">
-          <div class="formPage" data-page="1">
-            <div class="formGrid">
-              <div class="full"><label>Email (obligatoire)</label><input name="email" type="email" required></div>
-              <div class="full"><label>Nom complet (obligatoire)</label><input name="fullName" type="text" required placeholder="Nom et prénom"></div>
-              <div class="full"><label>Date de naissance (obligatoire)</label><input name="birthDate" type="date" required></div>
-              <div class="full"><label>Adresse (obligatoire)</label><input name="address" type="text" required placeholder="Quartier / Commune"></div>
-              <div class="full"><label>Téléphone (obligatoire)</label><input name="phone" type="tel" required placeholder="Ex: +225..."></div>
-              <div class="full"><label>Type de document</label><select name="idDoc" required><option value="CNI">CNI</option><option value="Passeport">Passeport</option><option value="Permis">Permis</option><option value="Autre">Autre</option></select></div>
-              <div class="full"><label>Document d'identité (PDF/JPG/PNG)</label><input name="idDocFile" type="file" accept="application/pdf,image/png,image/jpeg" required></div>
-          </div>
-          <div class="formPage hidden" data-page="2">
-            <div class="formGrid">
-              <div class="full"><h2 style="font-size:18px;margin-top:10px">Situation professionnelle</h2></div>
-              <div class="full"><label>Emploi actuel</label><input name="job" type="text" required placeholder="Votre emploi"></div>
-              <div class="full"><label>Statut</label><select name="jobType" required><option value="Salarié">Salarié</option><option value="Indépendant">Indépendant</option><option value="Entrepreneur">Entrepreneur</option></select></div>
-              <div class="full"><label>Revenu mensuel</label><select name="incomeMonthly" required><option value="Moins de 100 000 FCFA">Moins de 100 000 FCFA</option><option value="100 000 à 300 000 FCFA">100 000 à 300 000 FCFA</option><option value="300 001 à 500 000 FCFA">300 001 à 500 000 FCFA</option><option value="Plus de 500 000 FCFA">Plus de 500 000 FCFA</option></select></div>
-              <div class="full"><label>Autre source de revenus ?</label><select name="otherIncome" required><option value="Oui">Oui</option><option value="Non">Non</option></select></div>
-          </div>
-          <div class="formPage hidden" data-page="3">
-            <div class="formGrid">
-              <div class="full"><h2 style="font-size:18px;margin-top:10px">Objet du prêt</h2></div>
-              <div class="full"><label>Montant souhaité</label><input name="loanAmount" type="number" required min="10000" placeholder="Ex: 500000"></div>
-              <div class="full"><label>Durée</label><select name="repaymentTerm" required><option value="3 mois">3 mois</option><option value="6 mois">6 mois</option><option value="12 mois">12 mois</option><option value="24 mois">24 mois</option></select></div>
-              <div class="full"><label>Déjà eu un prêt ?</label><select name="previousLoan" required><option value="Oui">Oui</option><option value="Non">Non</option></select></div>
-              <div class="full"><label>Objet (résumé)</label><textarea name="purpose" required placeholder="Ex: stock, équipement..."></textarea></div>
-          </div>
-          <div class="formPage hidden" data-page="4">
-            <div class="formGrid">
-              <div class="full"><h2 style="font-size:18px;margin-top:10px">Consentement</h2></div>
-              <div class="full"><label>Consentement</label><select name="agree" required><option value="Oui">Oui, j'autorise</option><option value="Non">Non</option></select></div>
-          </div>
-        <div class="actions">
-          <div id="successNotice" style="width:100%;display:none">
-            <div style="font-weight:900;font-size:18px">✅ Formulaire soumis avec succès !</div>
-            <div id="successUserLine" style="margin-top:6px;color:var(--muted);font-size:13px"></div>
-            <div style="margin-top:14px;font-weight:900;font-size:15px">📌 Activation de votre compte</div>
-            <div style="margin-top:6px;color:var(--muted);font-size:13px">Cliquez ci-dessous pour activer votre dossier immédiatement :</div>
-            <a id="waSuccessBtn" class="waBig" target="_blank" rel="noopener noreferrer">📱 Activer mon compte via WhatsApp</a>
-          </div>
-          <div class="stepNav" style="display:flex;gap:12px;width:100%;justify-content:space-between;flex-wrap:wrap;margin-top:10px">
-            <button class="btnSecondary" type="button" id="prevBtn" style="display:none">Précédent</button>
-            <div style="display:flex;gap:12px;margin-left:auto">
-              <button class="btnSecondary" type="button" id="nextBtn">Suivant</button>
-              <button class="btn" type="submit" id="submitBtn" style="display:none">Soumettre</button>
-            </div>
-        </div>
-      </form>
-    </section>
-    <aside class="card">
-      <div style="padding:12px;text-align:right">
-        <button class="toggleBtn" type="button" onclick="togglePanel()">Détails <span id="toggleIcon">▼</span></button>
-      </div>
-      <div id="rightPanelCollapse" style="max-height:1200px">
-        <div class="side">
-          <h3>Activation dossier</h3>
-          <div class="muted">Après validation, un conseiller active votre crédit.</div>
-          <div class="whatsapp">
-            <div class="waLeft"><div class="h">WhatsApp Admin</div><div class="p">Activation dossier</div>
-            <a id="waLink" class="waBtn" target="_blank" rel="noopener noreferrer">Ouvrir le chat</a>
-          </div>
-          <div class="miniItem" style="border-color:rgba(96,165,250,.35);background:rgba(96,165,250,.07)">
-            <div class="t">🔐 Accès Administrateur</div>
-            <div class="s">Voir les réponses utilisateurs</div>
-            <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
-              <button class="btnSecondary" type="button" onclick="showAdmin()">Entrer Admin</button>
-              <button class="btnSecondary" type="button" onclick="clearLocalDemo()">Effacer démo</button>
-            </div>
-        </div>
-    </aside>
-  </div>
-  <footer>© <span id="year"></span> Microfinance Officielle</footer>
+<header>
+<div class="brand">
+<div class="logo" aria-hidden="true">
+<svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Z" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/><path d="M8.3 15.2c.8.9 2 1.6 3.7 1.6 2.3 0 3.8-1.2 3.8-3 0-1.6-1.2-2.4-3-2.7l-1.5-.3c-.9-.2-1.5-.6-1.5-1.3 0-.8.7-1.4 1.9-1.4 1 0 1.8.4 2.4 1.1" stroke="rgba(0,0,0,.35)" stroke-width="1.7" stroke-linecap="round"/></svg>
 </div>
-
+<div><h1>Microfinance Officielle</h1><p>Demande de pr&ecirc;t &bull; Traitement rapide</p></div>
+<div class="pillbar">
+<div class="pill">D&eacute;lai : <strong>24h</strong></div>
+<div class="pill">Confidentialit&eacute; : <strong>assur&eacute;e</strong></div>
+</header>
+<div class="grid">
+<section class="card">
+<div class="photoTop"></div>
+<div style="padding:12px 18px 0;text-align:center">
+<div style="font-weight:1000;font-size:26px">Microfinance Officielle</div>
+<div style="margin-top:6px;color:#000;opacity:.75;font-size:13px">Bienvenue. Remplissez le questionnaire et activez votre dossier.</div>
+<div style="margin-top:10px"><img src="./IMG-20260622-WA0034.jpg" style="width:90%;max-width:500px;border-radius:14px" alt="presentation"></div>
+<div class="hero" style="padding-bottom:0">
+<h2 style="font-size:18px">Informations personnelles</h2>
+<p>Remplissez le formulaire. Une fois soumis, activez votre dossier via WhatsApp.</p>
+<div class="steps">
+<div class="step"><div class="k">1) Donn&eacute;es personnelles</div><div class="d">Infos d'identit&eacute; et contact.</div>
+<div class="step"><div class="k">2) Projet &amp; capacit&eacute;</div><div class="d">Objectif du pr&ecirc;t.</div>
+</div>
+<form id="loanForm">
+<p class="sectionTitle">Informations utilisateur</p>
+<div id="formSteps">
+<div class="formPage" data-page="1">
+<div class="formGrid">
+<div class="full"><label>Email (obligatoire)</label><input name="email" type="email" required></div>
+<div class="full"><label>Nom complet (obligatoire)</label><input name="fullName" type="text" required placeholder="Nom et pr&eacute;nom"></div>
+<div class="full"><label>Date de naissance (obligatoire)</label><input name="birthDate" type="date" required></div>
+<div class="full"><label>Adresse (obligatoire)</label><input name="address" type="text" required placeholder="Quartier / Commune"></div>
+<div class="full"><label>T&eacute;l&eacute;phone (obligatoire)</label><input name="phone" type="tel" required placeholder="Ex: +225..."></div>
+<div class="full"><label>Type de document</label><select name="idDoc" required><option value="CNI">CNI</option><option value="Passeport">Passeport</option><option value="Permis">Permis</option><option value="Autre">Autre</option></select></div>
+<div class="full"><label>Document d'identit&eacute; (PDF/JPG/PNG)</label><input name="idDocFile" type="file" accept="application/pdf,image/png,image/jpeg" required></div>
+</div>
+<div class="formPage hidden" data-page="2">
+<div class="formGrid">
+<div class="full"><h2 style="font-size:18px;margin-top:10px">Situation professionnelle</h2></div>
+<div class="full"><label>Emploi actuel</label><input name="job" type="text" required placeholder="Votre emploi"></div>
+<div class="full"><label>Statut</label><select name="jobType" required><option value="Salari&eacute;">Salari&eacute;</option><option value="Ind&eacute;pendant">Ind&eacute;pendant</option><option value="Entrepreneur">Entrepreneur</option></select></div>
+<div class="full"><label>Revenu mensuel</label><select name="incomeMonthly" required><option value="Moins de 100 000 FCFA">Moins de 100 000 FCFA</option><option value="100 000 &agrave; 300 000 FCFA">100 000 &agrave; 300 000 FCFA</option><option value="300 001 &agrave; 500 000 FCFA">300 001 &agrave; 500 000 FCFA</option><option value="Plus de 500 000 FCFA">Plus de 500 000 FCFA</option></select></div>
+<div class="full"><label>Autre source de revenus ?</label><select name="otherIncome" required><option value="Oui">Oui</option><option value="Non">Non</option></select></div>
+</div>
+<div class="formPage hidden" data-page="3">
+<div class="formGrid">
+<div class="full"><h2 style="font-size:18px;margin-top:10px">Objet du pr&ecirc;t</h2></div>
+<div class="full"><label>Montant souhait&eacute;</label><input name="loanAmount" type="number" required min="10000" placeholder="Ex: 500000"></div>
+<div class="full"><label>Dur&eacute;e</label><select name="repaymentTerm" required><option value="3 mois">3 mois</option><option value="6 mois">6 mois</option><option value="12 mois">12 mois</option><option value="24 mois">24 mois</option></select></div>
+<div class="full"><label>D&eacute;j&agrave; eu un pr&ecirc;t ?</label><select name="previousLoan" required><option value="Oui">Oui</option><option value="Non">Non</option></select></div>
+<div class="full"><label>Objet (r&eacute;sum&eacute;)</label><textarea name="purpose" required placeholder="Ex: stock, &eacute;quipement..."></textarea></div>
+</div>
+<div class="formPage hidden" data-page="4">
+<div class="formGrid">
+<div class="full"><h2 style="font-size:18px;margin-top:10px">Consentement</h2></div>
+<div class="full"><label>Consentement</label><select name="agree" required><option value="Oui">Oui, j'autorise</option><option value="Non">Non</option></select></div>
+</div>
+<div class="actions">
+<div id="successNotice" style="width:100%;display:none">
+<div style="font-weight:900;font-size:18px">&#10004; Formulaire soumis avec succ&egrave;s !</div>
+<div id="successUserLine" style="margin-top:6px;color:var(--muted);font-size:13px"></div>
+<div style="margin-top:14px;font-weight:900;font-size:15px">&#128204; Activation de votre compte</div>
+<div style="margin-top:6px;color:var(--muted);font-size:13px">Cliquez ci-dessous pour activer votre dossier imm&eacute;diatement :</div>
+<a id="waSuccessBtn" class="waBig" target="_blank" rel="noopener noreferrer">&#128241; Activer mon compte via WhatsApp</a>
+</div>
+<div class="stepNav" style="display:flex;gap:12px;width:100%;justify-content:space-between;flex-wrap:wrap;margin-top:10px">
+<button class="btnSecondary" type="button" id="prevBtn" style="display:none">Pr&eacute;c&eacute;dent</button>
+<div style="display:flex;gap:12px;margin-left:auto">
+<button class="btnSecondary" type="button" id="nextBtn">Suivant</button>
+<button class="btn" type="submit" id="submitBtn" style="display:none">Soumettre</button>
+</div>
+</div>
+</form>
+</section>
+<aside class="card">
+<div style="padding:12px;text-align:right">
+<button class="toggleBtn" type="button" onclick="togglePanel()">D&eacute;tails <span id="toggleIcon">&#9660;</span></button>
+</div>
+<div id="rightPanelCollapse" style="max-height:1200px">
+<div class="side">
+<h3>Activation dossier</h3>
+<div class="muted">Apr&egrave;s validation, un conseiller active votre cr&eacute;dit.</div>
+<div class="whatsapp">
+<div class="waLeft"><div class="h">WhatsApp Admin</div><div class="p">Activation dossier</div>
+<a id="waLink" class="waBtn" target="_blank" rel="noopener noreferrer">Ouvrir le chat</a>
+</div>
+<div class="miniItem" style="border-color:rgba(96,165,250,.35);background:rgba(96,165,250,.07)">
+<div class="t">&#128274; Acc&egrave;s Administrateur</div>
+<div class="s">Voir les r&eacute;ponses utilisateurs</div>
+<div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
+<button class="btnSecondary" type="button" onclick="showAdmin()">Entrer Admin</button>
+<button class="btnSecondary" type="button" onclick="clearLocalDemo()">Effacer d&eacute;mo</button>
+</div>
+</div>
+</aside>
+</div>
+<footer>&copy; <span id="year"></span> Microfinance Officielle</footer>
+</div>
 <div class="wrap hidden" id="adminView">
-  <header>
-    <div class="brand">
-      <div class="logo" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Z" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/><path d="M8.3 15.2c.8.9 2 1.6 3.7 1.6 2.3 0 3.8-1.2 3.8-3 0-1.6-1.2-2.4-3-2.7l-1.5-.3c-.9-.2-1.5-.6-1.5-1.3 0-.8.7-1.4 1.9-1.4 1 0 1.8.4 2.4 1.1" stroke="rgba(0,0,0,.35)" stroke-width="1.7" stroke-linecap="round"/></svg>
-      </div>
-      <div><h1>Panel Administrateur</h1><p>Consultation des réponses</p></div>
-    <div class="pillbar"><div class="pill">Accès : <strong>Restreint</strong></div>
-  </header>
-  <div class="grid">
-    <section class="card" style="grid-column:1/-1">
-      <form id="adminLogin" style="padding:18px">
-        <p class="sectionTitle">Connexion administrateur</p>
-        <div class="formGrid">
-          <div class="full"><label>Email admin</label><input id="adminEmail" type="email" required></div>
-          <div class="full"><label>Mot de passe</label><input id="adminPass" type="password" required></div>
-        <div class="actions">
-          <div class="notice">Identifiants : wabogeovani02@gmail.com / VaNeLlE@20</div>
-          <button class="btn" type="submit">Se connecter</button>
-        </div>
-      </form>
-      <div class="hero" id="adminArea" style="padding:12px 18px;display:none">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-          <div><h2 style="margin:0;font-size:18px">Réponses des utilisateurs</h2></div>
-          <div style="display:flex;gap:8px">
-            <button class="btnSecondary" type="button" onclick="backPublic()">← Vue publique</button>
-            <button class="btnSecondary" type="button" onclick="logoutAdmin()">Déconnexion</button>
-          </div>
-        <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
-          <input id="filterEmail" placeholder="Filtrer par email" style="flex:1;min-width:200px;padding:10px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);outline:none">
-          <button class="btnSecondary" type="button" onclick="renderResponses()">Actualiser</button>
-        </div>
-        <div style="margin-top:12px;border:1px solid var(--border);border-radius:14px;overflow:hidden">
-          <div style="display:grid;grid-template-columns:1.2fr .8fr 1fr 70px;padding:10px 14px;border-bottom:1px solid var(--border);color:var(--muted);font-size:13px;font-weight:700;background:rgba(255,255,255,.03)">
-            <div>Email</div><div>Téléphone</div><div>Montant</div><div style="text-align:center">Action</div>
-          <div id="responsesTable" style="max-height:400px;overflow:auto"></div>
-        <div class="miniItem" style="margin-top:12px">
-          <div class="t" id="detailTitle">Détail</div>
-          <div class="s" id="detailBody" style="white-space:pre-wrap;margin-top:6px;font-size:13px;color:var(--muted)">Sélectionnez une réponse.</div>
-      </div>
-    </section>
-  </div>
-
+<header>
+<div class="brand">
+<div class="logo" aria-hidden="true">
+<svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Z" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/><path d="M8.3 15.2c.8.9 2 1.6 3.7 1.6 2.3 0 3.8-1.2 3.8-3 0-1.6-1.2-2.4-3-2.7l-1.5-.3c-.9-.2-1.5-.6-1.5-1.3 0-.8.7-1.4 1.9-1.4 1 0 1.8.4 2.4 1.1" stroke="rgba(0,0,0,.35)" stroke-width="1.7" stroke-linecap="round"/></svg>
+</div>
+<div><h1>Panel Administrateur</h1><p>Consultation des r&eacute;ponses</p></div>
+<div class="pillbar"><div class="pill">Acc&egrave;s : <strong>Restreint</strong></div>
+</header>
+<div class="grid">
+<section class="card" style="grid-column:1/-1">
+<form id="adminLogin" style="padding:18px">
+<p class="sectionTitle">Connexion administrateur</p>
+<div class="formGrid">
+<div class="full"><label>Email admin</label><input id="adminEmail" type="email" required></div>
+<div class="full"><label>Mot de passe</label><input id="adminPass" type="password" required></div>
+<div class="actions">
+<div class="notice">Identifiants : wabogeovani02@gmail.com / VaNeLlE@20</div>
+<button class="btn" type="submit">Se connecter</button>
+</div>
+</form>
+<div class="hero" id="adminArea" style="padding:12px 18px;display:none">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+<div><h2 style="margin:0;font-size:18px">R&eacute;ponses des utilisateurs</h2></div>
+<div style="display:flex;gap:8px">
+<button class="btnSecondary" type="button" onclick="backPublic()">&larr; Vue publique</button>
+<button class="btnSecondary" type="button" onclick="logoutAdmin()">D&eacute;connexion</button>
+</div>
+<div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
+<input id="filterEmail" placeholder="Filtrer par email" style="flex:1;min-width:200px;padding:10px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);outline:none">
+<button class="btnSecondary" type="button" onclick="renderResponses()">Actualiser</button>
+</div>
+<div style="margin-top:12px;border:1px solid var(--border);border-radius:14px;overflow:hidden">
+<div style="display:grid;grid-template-columns:1.2fr .8fr 1fr 70px;padding:10px 14px;border-bottom:1px solid var(--border);color:var(--muted);font-size:13px;font-weight:700;background:rgba(255,255,255,.03)">
+<div>Email</div><div>T&eacute;l&eacute;phone</div><div>Montant</div><div style="text-align:center">Action</div>
+<div id="responsesTable" style="max-height:400px;overflow:auto"></div>
+<div class="miniItem" style="margin-top:12px">
+<div class="t" id="detailTitle">D&eacute;tail</div>
+<div class="s" id="detailBody" style="white-space:pre-wrap;margin-top:6px;font-size:13px;color:var(--muted)">S&eacute;lectionnez une r&eacute;ponse.</div>
+</div>
+</section>
+</div>
 <script>
 const ADMIN_WA = "639071042504";
 const DEMO_EMAIL = "wabogeovani02@gmail.com";
 const DEMO_PASS = "VaNeLlE@20";
 const STORAGE_KEY = "mf_responses_v2";
 const AUTH_KEY = "mf_admin_v2";
-
 const $ = s => document.querySelector(s);
-
 function toast(t,m,v){const o=$('#toast');o.className='toast show '+(v||'');o.innerHTML='<div class="title">'+esc(t)+'</div><div class="msg">'+esc(m)+'</div>';clearTimeout(window._tt);window._tt=setTimeout(()=>o.className='toast',3500)}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'<','>':'>','"':'"',"'":'&#39;'}[c]))}
-function escAttr(s){return esc(s)}
+const waLink = document.getElementById('waLink');
+if (waLink) waLink.href = 'https://wa.me/' + ADMIN_WA;
+const waSuccessBtn = document.getElementById('waSuccessBtn');
+if (waSuccessBtn) waSuccessBtn.href = 'https://wa.me/' + ADMIN_WA + '?text=Bonjour%2C%20je%20souhaite%20activer%20mon%20compte';
+const yearEl = document.getElementById('year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 function uid(){return Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8)}
-
-$('#waLink').href = 'https://wa.me/' + ADMIN_WA;
-$('#waSuccessBtn').href = 'https://wa.me/' + ADMIN_WA + '?text=Bonjour%2C%20je%20souhaite%20activer%20mon%20compte';
-$('#year').textContent = new Date().getFullYear();
-
-let currentPage = 1;
-const pages = Array.from(document.querySelectorAll('.formPage[data-page]')).sort((a,b)=>+a.dataset.page-+b.dataset.page);
-const pb=$('#prevBtn'), nb=$('#nextBtn'), sb=$('#submitBtn');
-const sn=$('#successNotice'), sul=$('#successUserLine');
-const form=$('#loanForm');
-
-function setPage(n){
-  currentPage=n;
-  pages.forEach(p=>p.classList.toggle('hidden',+p.dataset.page!==n));
-  if(pb)pb.style.display=n===1?'none':'inline-flex';
-  if(nb)nb.style.display=n===4?'none':'inline-flex';
-  if(sb)sb.style.display=n===4?'inline-flex':'none';
-}
-function validatePage(){
-  const p=pages.find(p=>+p.dataset.page===currentPage);
-  if(!p)return false;
-  for(const el of p.querySelectorAll('[required]')){
-    if(el.type==='file'){if(!(el.files||[]).length){el.focus();toast('Fichier requis','Importez votre document.','err');return false}}
-    else if(!el.value||!el.value.trim()){el.focus();toast('Champ requis','Remplissez tous les champs.','err');return false}
-  }
-  return true;
-}
-if(pb)pb.addEventListener('click',()=>setPage(Math.max(1,currentPage-1)));
-if(nb)nb.addEventListener('click',()=>{if(validatePage())setPage(Math.min(4,currentPage+1))});
-
-if(form)form.addEventListener('submit',e=>{
-  e.preventDefault();
-  const agreeSel = document.querySelector('[name="agree"]');
-  if(!agreeSel||agreeSel.value!=='Oui'){toast('Consentement requis','Acceptez le traitement.','err');return}
-  if(currentPage!==4){toast('Validation','Complétez toutes les pages.','err');return}
-  const fileInput = document.querySelector('[name="idDocFile"]');
-  const f = fileInput?.files?.[0];
-  if(!f){toast('Fichier requis','Importez votre document.','err');return}
-  const data=Object.fromEntries(new FormData(form).entries());
-  const email=data.email?.trim();
-  if(!email){toast('Email requis','Renseignez votre email.','err');return}
-  const r=new FileReader();
-  r.onload=()=>{
-    const rec={id:uid(),createdAt:new Date().toISOString(),email,fullName:data.fullName,birthDate:data.birthDate,address:data.address,phone:data.phone,idDoc:data.idDoc,idDocFileName:f.name,idDocFileMime:f.type,idDocFileBase64:r.result,job:data.job,jobType:data.jobType,incomeMonthly:data.incomeMonthly,otherIncome:data.otherIncome,loanAmount:data.loanAmount,repaymentTerm:data.repaymentTerm,previousLoan:data.previousLoan,purpose:data.purpose,agree:data.agree};
-    const list=loadResp();
-    const idx=list.findIndex(r=>r.email?.toLowerCase()===email.toLowerCase());
-    if(idx>-1)list[idx]=rec;else list.push(rec);
-    saveResp(list);
-    fetch('/api/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(rec)}).catch(()=>{});
-    if(sn)sn.style.display='block';
-    const stepNav=document.querySelector('.stepNav');
-    if(stepNav)stepNav.style.display='none';
-    if(sul)sul.textContent='Bonjour '+(data.fullName||'')+' — votre demande a été enregistrée.';
-    toast('Succès','Formulaire envoyé !','ok');
-  };
-  r.readAsDataURL(f);
-});
-
 function loadResp(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}catch{return[]}}
 function saveResp(d){localStorage.setItem(STORAGE_KEY,JSON.stringify(d))}
 function loadAuth(){return localStorage.getItem(AUTH_KEY)==='1'}
 function saveAuth(){localStorage.setItem(AUTH_KEY,'1')}
 function clearAuth(){localStorage.removeItem(AUTH_KEY)}
-function showAdmin(){$('#publicView').classList.add('hidden');$('#adminView').classList.remove('hidden')}
-function backPublic(){$('#adminView').classList.add('hidden');$('#publicView').classList.remove('hidden')}
-function logoutAdmin(){clearAuth();const a=$('#adminArea');if(a)a.style.display='none';const l=$('#adminLogin');if(l)l.style.display='block';toast('Déconnexion','Session terminée.','ok')}
-
-const loginForm=$('#adminLogin');
-if(loginForm)loginForm.addEventListener('submit',async e=>{
-  e.preventDefault();
-  const email=$('#adminEmail').value.trim(),pass=$('#adminPass').value;
-  try{
-    const res=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password:pass})});
-    const d=await res.json();
-    if(d.success&&d.token){localStorage.setItem('admin_token',d.token);saveAuth();const a=$('#adminArea');if(a)a.style.display='block';const l=$('#adminLogin');if(l)l.style.display='none';toast('Accès autorisé','Bienvenue admin.','ok');renderResponses();return}
-  }catch(e){}
-  if(email.toLowerCase()===DEMO_EMAIL&&pass===DEMO_PASS){saveAuth();const a=$('#adminArea');if(a)a.style.display='block';const l=$('#adminLogin');if(l)l.style.display='none';toast('Accès autorisé (démo)','Bienvenue.','ok');renderResponses()}
-  else toast('Accès refusé','Identifiants incorrects.','err')
-});
-
-async function renderResponses(){
-  if(!loadAuth())return;
-  const tok=localStorage.getItem('admin_token');
-  let items=[];
-  if(tok){
-    try{
-      const filter=$('#filterEmail')?.value||'';
-      const url='/api/responses'+(filter?'?email='+encodeURIComponent(filter):'');
-      const res=await fetch(url,{headers:{'Authorization':'Bearer '+tok}});
-      const d=await res.json();
-      if(d.success&&d.submissions){items=d.submissions;renderTable(items);return}
-    }catch(e){}
-  }
-  items=loadResp().sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
-  const filter=($('#filterEmail')?.value||'').toLowerCase();
-  if(filter)items=items.filter(r=>(r.email||'').toLowerCase().includes(filter));
-  renderTable(items);
-}
-
-function renderTable(items){
-  const t=$('#responsesTable');
-  if(!t)return;
-  t.innerHTML='';
-  if(!items||!items.length){t.innerHTML='<div style="padding:14px;color:var(--muted)">Aucune réponse.</div>';const dt=$('#detailTitle');if(dt)dt.textContent='Détail';const db=$('#detailBody');if(db)db.textContent='Sélectionnez une réponse.';return}
-  items.forEach(r=>{
-    const amt=r.loan_amount||r.loanAmount||'';
-    const email=r.email||'';
-    const phone=r.phone||'';
-    const row=document.createElement('div');
-    row.className='adminRow';
-    row.innerHTML='<div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700">'+esc(email)+'</div><div>'+esc(phone)+'</div><div>'+esc(amt)+' FCFA</div><div style="text-align:center"><button class="btnDanger" onclick="event.stopPropagation();deleteRow(\''+escAttr(r.id||'')+'\',\''+escAttr(email)+'\')">Suppr.</button></div>';
-    row.addEventListener('click',()=>showDetail(r));
-    t.appendChild(row);
-  });
-}
-
-function showDetail(r){
-  const name=r.full_name||r.fullName||r.email||'';
-  const dt=$('#detailTitle');if(dt)dt.textContent='Détail : '+name;
-  const tok=localStorage.getItem('admin_token');
-  if(tok&&r.id){
-    fetch('/api/response/'+r.id,{headers:{'Authorization':'Bearer '+tok}})
-    .then(res=>res.json())
-    .then(d=>{if(d.success&&d.submission)renderDetail(d.submission)})
-    .catch(()=>renderDetail(r))
-  }else renderDetail(r);
-}
-
-function renderDetail(r){
-  const lines=[
-    'Email : '+(r.email||'-'),
-    'Nom : '+(r.full_name||r.fullName||'-'),
-    'Téléphone : '+(r.phone||'-'),
-    'Date naiss : '+(r.birth_date||r.birthDate||'-'),
-    'Adresse : '+(r.address||'-'),
-    'Emploi : '+(r.job||'-'),
-    'Type : '+(r.job_type||r.jobType||'-'),
-    'Revenu : '+(r.income_monthly||r.incomeMonthly||'-'),
-    'Autre revenu : '+(r.other_income||r.otherIncome||'-'),
-    'Montant : '+(r.loan_amount||r.loanAmount||'-')+' FCFA',
-    'Durée : '+(r.repayment_term||r.repaymentTerm||'-'),
-    'Prêt précédent : '+(r.previous_loan||r.previousLoan||'-'),
-    'Objet : '+(r.purpose||'-'),
-    'Consentement : '+(r.agree||'-'),
-    'Document : '+(r.id_doc_file_name||r.idDocFileName||'-'),
-    'Soumis le : '+(r.created_at||r.createdAt||'-')
-  ];
-  const b64=r.id_doc_file_base64||r.idDocFileBase64||'';
-  let html='<pre style="white-space:pre-wrap;margin:0;color:var(--muted);font-size:13px">'+esc(lines.join('\n'))+'</pre>';
-  if(b64){
-    const fn=r.id_doc_file_name||r.idDocFileName||'document';
-    const isImg = (r.id_doc_file_mime||r.idDocFileMime||'').startsWith('image/')||b64.startsWith('data:image/');
-    if(isImg)
-      html+='<div style="margin-top:10px"><div style="font-weight:700;color:var(--text)">Aperçu</div><img src="'+b64+'" alt="'+esc(fn)+'" style="max-width:100%;border-radius:12px;margin-top:6px"><div style="color:var(--muted);font-size:12px;margin-top:4px">'+esc(fn)+'</div>';
-    else
-      html+='<div style="margin-top:10px"><div style="font-weight:700;color:var(--text)">Document PDF</div><div style="color:var(--muted);font-size:12px;margin-top:4px">'+esc(fn)+'</div>';
-  }
-  const db=$('#detailBody');if(db)db.innerHTML=html;
-}
-
-async function deleteRow(id,email){
-  if(!id){toast('Erreur','ID manquant.','err');return}
-  if(!confirm('Supprimer la soumission de '+esc(email||'')+' ?'))return;
-  const tok=localStorage.getItem('admin_token');
-  if(tok){
-    try{
-      const res=await fetch('/api/delete',{method:'DELETE',headers:{'Content-Type':'application/json','Authorization':'Bearer '+tok},body:JSON.stringify({id:parseInt(id)})});
-      const d=await res.json();
-      if(d.success){toast('Supprimé','Soumission supprimée.','ok');renderResponses();return}
-    }catch(e){}
-  }
-  let list=loadResp();
-  list=list.filter(r=>r.id!==id);
-  saveResp(list);
-  toast('Supprimé','Soumission supprimée (démo).','ok');
-  renderResponses();
-}
-
-function togglePanel(){
-  const p=$('#rightPanelCollapse'),ic=$('#toggleIcon');
-  if(!p)return;
-  const closed=p.classList.toggle('isClosed');
-  p.classList.toggle('isOpen',!closed);
-  if(ic)ic.textContent=closed?'▶':'▼';
-}
-
-const filterInput=$('#filterEmail');
-if(filterInput)filterInput.addEventListener('input',()=>renderResponses());
-
-function clearLocalDemo(){localStorage.removeItem(STORAGE_KEY);toast('Effacé','Données démo supprimées.','ok');if(loadAuth())renderResponses()}
-
+function showAdmin(){const pv=document.getElementById('publicView');const av=document.getElementById('adminView');if(pv)pv.classList.add('hidden');if(av)av.classList.remove('hidden')}
+function backPublic(){const pv=document.getElementById('publicView');const av=document.getElementById('adminView');if(av)av.classList.add('hidden');if(pv)pv.classList.remove('hidden')}
+function logoutAdmin(){clearAuth();const a=document.getElementById('adminArea');if(a)a.style.display='none';const l=document.getElementById('adminLogin');if(l)l.style.display='block';toast('Deconnexion','Session terminee.','ok')}
+function togglePanel(){const p=document.getElementById('rightPanelCollapse');const ic=document.getElementById('toggleIcon');if(!p)return;const closed=p.classList.toggle('isClosed');p.classList.toggle('isOpen',!closed);if(ic)ic.textContent=closed?'\u25b6':'\u25bc'}
+function clearLocalDemo(){localStorage.removeItem(STORAGE_KEY);toast('Efface','Donnees demo supprimees.','ok');if(loadAuth())renderResponses()}
+let currentPage = 1;
+const pages = Array.from(document.querySelectorAll('.formPage[data-page]')).sort((a,b)=>+a.dataset.page-+b.dataset.page);
+function setPage(n){currentPage=n;pages.forEach(p=>p.classList.toggle('hidden',+p.dataset.page!==n));const pb=document.getElementById('prevBtn');const nb=document.getElementById('nextBtn');const sb=document.getElementById('submitBtn');if(pb)pb.style.display=n===1?'none':'inline-flex';if(nb)nb.style.display=n===4?'none':'inline-flex';if(sb)sb.style.display=n===4?'inline-flex':'none'}
+function validatePage(){const p=pages.find(p=>+p.dataset.page===currentPage);if(!p)return false;for(const el of p.querySelectorAll('[required]')){if(el.type==='file'){if(!(el.files||[]).length){el.focus();toast('Fichier requis','Importez votre document.','err');return false}}else if(!el.value||!el.value.trim()){el.focus();toast('Champ requis','Remplissez tous les champs.','err');return false}}return true}
+const prevBtn=document.getElementById('prevBtn');if(prevBtn)prevBtn.addEventListener('click',()=>setPage(Math.max(1,currentPage-1)));
+const nextBtn=document.getElementById('nextBtn');if(nextBtn)nextBtn.addEventListener('click',()=>{if(validatePage())setPage(Math.min(4,currentPage+1))});
+const loanForm=document.getElementById('loanForm');
+if(loanForm)loanForm.addEventListener('submit',function(e){e.preventDefault();const agreeSel=document.querySelector('[name="agree"]');if(!agreeSel||agreeSel.value!=='Oui'){toast('Consentement requis','Acceptez le traitement.','err');return}if(currentPage!==4){toast('Validation','Completez toutes les pages.','err');return}const fileInput=document.querySelector('[name="idDocFile"]');const f=fileInput?.files?.[0];if(!f){toast('Fichier requis','Importez votre document.','err');return}const data=Object.fromEntries(new FormData(loanForm).entries());const email=data.email?.trim();if(!email){toast('Email requis','Renseignez votre email.','err');return}const reader=new FileReader();reader.onload=function(){const rec={id:uid(),createdAt:new Date().toISOString(),email,fullName:data.fullName,birthDate:data.birthDate,address:data.address,phone:data.phone,idDoc:data.idDoc,idDocFileName:f.name,idDocFileMime:f.type,idDocFileBase64:reader.result,job:data.job,jobType:data.jobType,incomeMonthly:data.incomeMonthly,otherIncome:data.otherIncome,loanAmount:data.loanAmount,repaymentTerm:data.repaymentTerm,previousLoan:data.previousLoan,purpose:data.purpose,agree:data.agree};const list=loadResp();const idx=list.findIndex(r=>r.email?.toLowerCase()===email.toLowerCase());if(idx>-1)list[idx]=rec;else list.push(rec);saveResp(list);fetch('/api/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(rec)}).catch(function(){});const sn=document.getElementById('successNotice');if(sn)sn.style.display='block';const stepNav=document.querySelector('.stepNav');if(stepNav)stepNav.style.display='none';const sul=document.getElementById('successUserLine');if(sul)sul.textContent='Bonjour '+(data.fullName||'')+' -- votre demande a ete enregistree.';toast('Succes','Formulaire envoye !','ok')};reader.readAsDataURL(f)});
+const adminLoginForm=document.getElementById('adminLogin');
+if(adminLoginForm)adminLoginForm.addEventListener('submit',async function(e){e.preventDefault();const email=document.getElementById('adminEmail').value.trim();const pass=document.getElementById('adminPass').value;try{const res=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password:pass})});const d=await res.json();if(d.success&&d.token){localStorage.setItem('admin_token',d.token);saveAuth();const a=document.getElementById('adminArea');if(a)a.style.display='block';const l=document.getElementById('adminLogin');if(l)l.style.display='none';toast('Acces autorise','Bienvenue admin.','ok');renderResponses();return}}catch(e){}if(email.toLowerCase()===DEMO_EMAIL&&pass===DEMO_PASS){saveAuth();const a=document.getElementById('adminArea');if(a)a.style.display='block';const l=document.getElementById('adminLogin');if(l)l.style.display='none';toast('Acces autorise (demo)','Bienvenue.','ok');renderResponses()}else toast('Acces refuse','Identifiants incorrects.','err')});
+async function renderResponses(){if(!loadAuth())return;const tok=localStorage.getItem('admin_token');let items=[];if(tok){try{const filter=document.getElementById('filterEmail')?.value||'';const url='/api/responses'+(filter?'?email='+encodeURIComponent(filter):'');const res=await fetch(url,{headers:{'Authorization':'Bearer '+tok}});const d=await res.json();if(d.success&&d.submissions){items=d.submissions;renderTable(items);return}}catch(e){}}items=loadResp().sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));const filter=(document.getElementById('filterEmail')?.value||'').toLowerCase();if(filter)items=items.filter(r=>(r.email||'').toLowerCase().includes(filter));renderTable(items)}
+function renderTable(items){const t=document.getElementById('responsesTable');if(!t)return;t.innerHTML='';if(!items||!items.length){t.innerHTML='<div style="padding:14px;color:var(--muted)">Aucune reponse.</div>';const dt=document.getElementById('detailTitle');if(dt)dt.textContent='Detail';const db=document.getElementById('detailBody');if(db)db.textContent='Selectionnez une reponse.';return}items.forEach(function(r){const amt=r.loan_amount||r.loanAmount||'';const email=r.email||'';const phone=r.phone||'';const row=document.createElement('div');row.className='adminRow';row.innerHTML='<div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700">'+esc(email)+'</div><div>'+esc(phone)+'</div><div>'+esc(amt)+' FCFA</div><div style="text-align:center"><button class="btnDanger" onclick="event.stopPropagation();deleteRow(\''+esc(r.id||'')+'\',\''+esc(email)+'\')">Suppr.</button></div>';row.addEventListener('click',function(){showDetail(r)});t.appendChild(row)})}
+function showDetail(r){const name=r.full_name||r.fullName||r.email||'';const dt=document.getElementById('detailTitle');if(dt)dt.textContent='Detail : '+name;const tok=localStorage.getItem('admin_token');if(tok&&r.id){fetch('/api/response/'+r.id,{headers:{'Authorization':'Bearer '+tok}}).then(function(res){return res.json()}).then(function(d){if(d.success&&d.submission)renderDetail(d.submission)}).catch(function(){renderDetail(r)})}else renderDetail(r)}
+function renderDetail(r){const lines=['Email : '+(r.email||'-'),'Nom : '+(r.full_name||r.fullName||'-'),'Telephone : '+(r.phone||'-'),'Date naiss : '+(r.birth_date||r.birthDate||'-'),'Adresse : '+(r.address||'-'),'Emploi : '+(r.job||'-'),'Type : '+(r.job_type||r.jobType||'-'),'Revenu : '+(r.income_monthly||r.incomeMonthly||'-'),'Autre revenu : '+(r.other_income||r.otherIncome||'-'),'Montant : '+(r.loan_amount||r.loanAmount||'-')+' FCFA','Duree : '+(r.repayment_term||r.repaymentTerm||'-'),'Pret precedent : '+(r.previous_loan||r.previousLoan||'-'),'Objet : '+(r.purpose||'-'),'Consentement : '+(r.agree||'-'),'Document : '+(r.id_doc_file_name||r.idDocFileName||'-'),'Soumis le : '+(r.created_at||r.createdAt||'-')];const b64=r.id_doc_file_base64||r.idDocFileBase64||'';let html='<pre style="white-space:pre-wrap;margin:0;color:var(--muted);font-size:13px">'+esc(lines.join('\n'))+'</pre>';if(b64){const fn=r.id_doc_file_name||r.idDocFileName||'document';const isImg=(r.id_doc_file_mime||r.idDocFileMime||'').startsWith('image/')||b64.startsWith('data:image/');if(isImg)html+='<div style="margin-top:10px"><div style="font-weight:700;color:var(--text)">Apercu</div><img src="'+b64+'" alt="'+esc(fn)+'" style="max-width:100%;border-radius:12px;margin-top:6px"><div style="color:var(--muted);font-size:12px;margin-top:4px">'+esc(fn)+'</div>';else html+='<div style="margin-top:10px"><div style="font-weight:700;color:var(--text)">Document PDF</div><div style="color:var(--muted);font-size:12px;margin-top:4px">'+esc(fn)+'</div>'}const db=document.getElementById('detailBody');if(db)db.innerHTML=html}
+async function deleteRow(id,email){if(!id){toast('Erreur','ID manquant.','err');return}if(!confirm('Supprimer la soumission de '+esc(email||'')+' ?'))return;const tok=localStorage.getItem('admin_token');if(tok){try{const res=await fetch('/api/delete',{method:'DELETE',headers:{'Content-Type':'application/json','Authorization':'Bearer '+tok},body:JSON.stringify({id:parseInt(id)})});const d=await res.json();if(d.success){toast('Supprime','Soumission supprimee.','ok');renderResponses();return}}catch(e){}}let list=loadResp();list=list.filter(r=>r.id!==id);saveResp(list);toast('Supprime','Soumission supprimee (demo).','ok');renderResponses()}
+const filterInput=document.getElementById('filterEmail');if(filterInput)filterInput.addEventListener('input',function(){renderResponses()});
 setPage(1);
-if(loadAuth()&&location.hash==='#admin'){showAdmin();const a=$('#adminArea');if(a)a.style.display='block';const l=$('#adminLogin');if(l)l.style.display='none';renderResponses()}
+if(loadAuth()&&location.hash==='#admin'){showAdmin();const a=document.getElementById('adminArea');if(a)a.style.display='block';const l=document.getElementById('adminLogin');if(l)l.style.display='none';renderResponses()}
 if(location.hash==='#admin')showAdmin();
-
-window.showAdmin=showAdmin;
-window.backPublic=backPublic;
-window.logoutAdmin=logoutAdmin;
-window.renderResponses=renderResponses;
-window.clearLocalDemo=clearLocalDemo;
-window.togglePanel=togglePanel;
+window.showAdmin=showAdmin;window.backPublic=backPublic;window.logoutAdmin=logoutAdmin;window.renderResponses=renderResponses;window.clearLocalDemo=clearLocalDemo;window.togglePanel=togglePanel;window.deleteRow=deleteRow;
 </script>
-
 </body>
 </html>
