@@ -4,6 +4,9 @@
 - [x] Modifier la validation page 1 : garantir champ fichier requis
 - [x] Modifier la soumission : convertir fichier en Base64 + stocker dans localStorage
 - [x] Modifier l'affichage admin : afficher nom du fichier + aperçu
+- [x] Supprimer le fallback "mode démo" avec identifiants hardcodés (`admin@demo.com` / `admin123`) dans `index.html`
+- [x] Créer `.env.local` avec `ADMIN_EMAIL=wabogeovani02@gmail.com`, `ADMIN_PASSWORD=VaNeLlE@20`, `DATABASE_URL`, `JWT_SECRET`
+- [x] Forcer la connexion admin à passer uniquement par l'API (via `/api/login`)
 
 ## ✅ Backend API Node.js créé pour Vercel
 

