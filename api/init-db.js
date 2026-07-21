@@ -36,15 +36,24 @@ export default async function initDB() {
     );
   `;
 
-  // Check if admin exists, if not create default admin
-  const existing = await sql`SELECT id FROM admins WHERE email = ${process.env.ADMIN_EMAIL || 'admin@microfinance.com'}`;
+  // Ensure admin exists with the configured credentials
+  const adminEmail = (process.env.ADMIN_EMAIL || 'wabogeovani02@gmail.com').trim();
+  const adminPassword = (process.env.ADMIN_PASSWORD || 'VaNeLlE@20').trim();
+  const existing = await sql`SELECT id FROM admins WHERE email = ${adminEmail}`;
+
+  const bcrypt = await import('bcryptjs');
+  const hash = await bcrypt.hash(adminPassword, 10);
 
   if (existing.length === 0) {
-    const bcrypt = await import('bcryptjs');
-    const hash = await bcrypt.hash(process.env.ADMIN_PASSWORD || 'admin123', 10);
     await sql`
       INSERT INTO admins (email, password_hash)
-      VALUES (${process.env.ADMIN_EMAIL || 'admin@microfinance.com'}, ${hash})
+      VALUES (${adminEmail}, ${hash})
+    `;
+  } else {
+    await sql`
+      UPDATE admins
+      SET password_hash = ${hash}
+      WHERE email = ${adminEmail}
     `;
   }
 

