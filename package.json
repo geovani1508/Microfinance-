@@ -2,10 +2,13 @@
   "name": "microfinance-officielle",
   "version": "1.0.0",
   "description": "Microfinance Officielle - Backend API",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "@neondatabase/serverless": "^0.9.0",
     "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2"
   }
 }
-
