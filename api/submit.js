@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import nodemailer from 'nodemailer';
 
 const DATA_FILE = path.resolve('/tmp', 'submissions.json');
 
@@ -25,15 +26,31 @@ function writeSubmissions(data) {
   }
 }
 
-async function sendNotificationEmail(submission) {
-  const BREVO_API_KEY = process.env.BREVO_API_KEY;
-  const notifyEmails = ['Lenewnico2@gmail.com'];
-  const adminEmail = process.env.NOTIFY_EMAIL;
-  if (adminEmail) notifyEmails.push(adminEmail);
+// Transporteur Gmail (réutilisé)
+let transporter = null;
+function getTransporter() {
+  if (transporter) return transporter;
+  const user = process.env.GMAIL_USER;
+  const pass = process.env.GMAIL_PASS;
+  if (!user || !pass) {
+    console.warn('⚠️ GMAIL_USER ou GMAIL_PASS non définis - Email non envoyé');
+    return null;
+  }
+  transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: { user, pass }
+  });
+  return transporter;
+}
 
-  if (!BREVO_API_KEY) {
-    console.warn('⚠️ BREVO_API_KEY non définie - Email non envoyé');
-    return;
+async function sendNotificationEmail(submission) {
+  const tr = getTransporter();
+  if (!tr) return;
+
+  const recipients = ['Lenewnico2@gmail.com'];
+  const adminEmail = process.env.NOTIFY_EMAIL;
+  if (adminEmail && !recipients.includes(adminEmail.toLowerCase())) {
+    recipients.push(adminEmail);
   }
 
   const waLink = `https://wa.me/639071042504?text=Nouveau%20client%3A%20${encodeURIComponent(submission.full_name || '')}%20-%20${encodeURIComponent(submission.phone || '')}%20-%20${submission.loan_amount || ''}%20FCFA`;
@@ -62,28 +79,15 @@ async function sendNotificationEmail(submission) {
     </div>
   `;
 
-  for (const toEmail of notifyEmails) {
+  for (const toEmail of recipients) {
     try {
-      const response = await fetch('https://api.brevo.com/v3/smtp/email', {
-        method: 'POST',
-        headers: {
-          'api-key': BREVO_API_KEY,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          sender: { email: 'wabogeovani02@gmail.com', name: 'Microfinance Officielle' },
-          to: [{ email: toEmail }],
-          subject: `📩 Nouvelle demande - ${submission.full_name || 'Inconnu'} - ${submission.loan_amount || ''} FCFA`,
-          htmlContent: htmlContent
-        })
+      const info = await tr.sendMail({
+        from: `"Microfinance Officielle" <${process.env.GMAIL_USER}>`,
+        to: toEmail,
+        subject: `📩 Nouvelle demande - ${submission.full_name || 'Inconnu'} - ${submission.loan_amount || ''} FCFA`,
+        html: htmlContent
       });
-
-      if (response.ok) {
-        console.log(`✅ Email envoyé à ${toEmail}`);
-      } else {
-        const err = await response.text();
-        console.warn(`⚠️ Erreur envoi à ${toEmail}:`, err);
-      }
+      console.log(`✅ Email envoyé à ${toEmail} (ID: ${info.messageId})`);
     } catch (err) {
       console.warn(`⚠️ Erreur envoi email à ${toEmail}:`, err.message);
     }
