@@ -1,24 +1,9 @@
-import fs from 'fs';
-import path from 'path';
+import sql from './db.js';
 import jwt from 'jsonwebtoken';
 
-const DATA_FILE = path.resolve('/tmp', 'submissions.json');
 const JWT_SECRET = process.env.JWT_SECRET || 'microfinance-secret-key-change-in-production';
 
-function readSubmissions() {
-  try {
-    if (fs.existsSync(DATA_FILE)) {
-      const raw = fs.readFileSync(DATA_FILE, 'utf8');
-      return JSON.parse(raw);
-    }
-  } catch (err) {
-    console.error('Erreur lecture fichier:', err);
-  }
-  return [];
-}
-
 export default async function handler(req, res) {
-  // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -32,7 +17,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Verify JWT token
+    // Verify JWT
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res.status(401).json({ error: 'Non autorisé' });
@@ -45,36 +30,27 @@ export default async function handler(req, res) {
       return res.status(401).json({ error: 'Token invalide ou expiré' });
     }
 
-    // Get filter from query params
     const filterEmail = req.query.email?.trim().toLowerCase() || '';
 
-    // Read submissions from JSON file
-    const allSubmissions = readSubmissions();
-
-    // Sort by created_at DESC
-    allSubmissions.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-
-    // Filter by email if needed
-    let submissions = allSubmissions;
+    let submissions;
     if (filterEmail) {
-      submissions = allSubmissions.filter(s => 
-        s.email?.toLowerCase().includes(filterEmail)
-      );
+      submissions = await sql`
+        SELECT id, email, full_name, phone, loan_amount, created_at
+        FROM submissions
+        WHERE LOWER(email) LIKE ${'%' + filterEmail + '%'}
+        ORDER BY created_at DESC
+      `;
+    } else {
+      submissions = await sql`
+        SELECT id, email, full_name, phone, loan_amount, created_at
+        FROM submissions
+        ORDER BY created_at DESC
+      `;
     }
-
-    // Return only summary fields
-    const summary = submissions.map(s => ({
-      id: s.id,
-      email: s.email,
-      full_name: s.full_name,
-      phone: s.phone,
-      loan_amount: s.loan_amount,
-      created_at: s.created_at
-    }));
 
     return res.status(200).json({
       success: true,
-      submissions: summary
+      submissions
     });
 
   } catch (error) {

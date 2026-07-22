@@ -1,24 +1,9 @@
-import fs from 'fs';
-import path from 'path';
+import sql from '../db.js';
 import jwt from 'jsonwebtoken';
 
-const DATA_FILE = path.resolve('/tmp', 'submissions.json');
 const JWT_SECRET = process.env.JWT_SECRET || 'microfinance-secret-key-change-in-production';
 
-function readSubmissions() {
-  try {
-    if (fs.existsSync(DATA_FILE)) {
-      const raw = fs.readFileSync(DATA_FILE, 'utf8');
-      return JSON.parse(raw);
-    }
-  } catch (err) {
-    console.error('Erreur lecture fichier:', err);
-  }
-  return [];
-}
-
 export default async function handler(req, res) {
-  // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -32,7 +17,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Verify JWT token
+    // Verify JWT
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res.status(401).json({ error: 'Non autorisé' });
@@ -46,22 +31,23 @@ export default async function handler(req, res) {
     }
 
     const { id } = req.query;
+    const parsedId = parseInt(id);
 
-    if (!id) {
+    if (!parsedId) {
       return res.status(400).json({ error: 'ID requis' });
     }
 
-    // Read submissions from JSON file
-    const submissions = readSubmissions();
-    const submission = submissions.find(s => s.id === id);
+    const submissions = await sql`
+      SELECT * FROM submissions WHERE id = ${parsedId}
+    `;
 
-    if (!submission) {
+    if (submissions.length === 0) {
       return res.status(404).json({ error: 'Soumission non trouvée' });
     }
 
     return res.status(200).json({
       success: true,
-      submission
+      submission: submissions[0]
     });
 
   } catch (error) {

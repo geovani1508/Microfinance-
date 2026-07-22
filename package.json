@@ -2,6 +2,7 @@
   "name": "microfinance-officielle",
   "version": "1.0.0",
   "description": "Microfinance Officielle - Backend API",
+  "type": "module",
   "scripts": {
     "start": "node server.js"
   },
@@ -13,3 +14,4 @@
     "nodemailer": "^9.0.3"
   }
 }
+

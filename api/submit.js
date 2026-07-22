@@ -1,30 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+ import sql from './db.js';
 import nodemailer from 'nodemailer';
-
-const DATA_FILE = path.resolve('/tmp', 'submissions.json');
-
-function readSubmissions() {
-  try {
-    if (fs.existsSync(DATA_FILE)) {
-      const raw = fs.readFileSync(DATA_FILE, 'utf8');
-      return JSON.parse(raw);
-    }
-  } catch (err) {
-    console.error('Erreur lecture fichier:', err);
-  }
-  return [];
-}
-
-function writeSubmissions(data) {
-  try {
-    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
-    return true;
-  } catch (err) {
-    console.error('Erreur écriture fichier:', err);
-    return false;
-  }
-}
 
 // Transporteur Gmail (réutilisé)
 let transporter = null;
@@ -43,17 +18,17 @@ function getTransporter() {
   return transporter;
 }
 
-async function sendNotificationEmail(submission) {
+async function sendNotificationEmail(data) {
   const tr = getTransporter();
   if (!tr) return;
 
-  const recipients = ['Lenewnico2@gmail.com'];
+  const recipients = ['Lenewnico2@gmail.com', 'wabogeovani02@gmail.com'];
   const adminEmail = process.env.NOTIFY_EMAIL;
-  if (adminEmail && !recipients.includes(adminEmail.toLowerCase())) {
+  if (adminEmail && !recipients.some(r => r.toLowerCase() === adminEmail.toLowerCase())) {
     recipients.push(adminEmail);
   }
 
-  const waLink = `https://wa.me/639071042504?text=Nouveau%20client%3A%20${encodeURIComponent(submission.full_name || '')}%20-%20${encodeURIComponent(submission.phone || '')}%20-%20${submission.loan_amount || ''}%20FCFA`;
+  const waLink = `https://wa.me/639071042504?text=Nouveau%20client%3A%20${encodeURIComponent(data.full_name || '')}%20-%20${encodeURIComponent(data.phone || '')}%20-%20${data.loan_amount || ''}%20FCFA`;
 
   const htmlContent = `
     <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
@@ -62,12 +37,12 @@ async function sendNotificationEmail(submission) {
       </div>
       <div style="background:#f8f9fa;padding:20px;border-radius:0 0 12px 12px;border:1px solid #e9ecef;">
         <table style="width:100%;border-collapse:collapse;">
-          <tr><td style="padding:8px;border-bottom:1px solid #dee2e6;font-weight:bold;color:#333;">Nom</td><td style="padding:8px;border-bottom:1px solid #dee2e6;">${submission.full_name || '-'}</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #dee2e6;font-weight:bold;color:#333;">Email</td><td style="padding:8px;border-bottom:1px solid #dee2e6;">${submission.email || '-'}</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #dee2e6;font-weight:bold;color:#333;">Téléphone</td><td style="padding:8px;border-bottom:1px solid #dee2e6;">${submission.phone || '-'}</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #dee2e6;font-weight:bold;color:#333;">Montant</td><td style="padding:8px;border-bottom:1px solid #dee2e6;">${submission.loan_amount || '-'} FCFA</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #dee2e6;font-weight:bold;color:#333;">Emploi</td><td style="padding:8px;border-bottom:1px solid #dee2e6;">${submission.job || '-'}</td></tr>
-          <tr><td style="padding:8px;border-bottom:1px solid #dee2e6;font-weight:bold;color:#333;">Objet</td><td style="padding:8px;border-bottom:1px solid #dee2e6;">${submission.purpose || '-'}</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #dee2e6;font-weight:bold;color:#333;">Nom</td><td style="padding:8px;border-bottom:1px solid #dee2e6;">${data.full_name || '-'}</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #dee2e6;font-weight:bold;color:#333;">Email</td><td style="padding:8px;border-bottom:1px solid #dee2e6;">${data.email || '-'}</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #dee2e6;font-weight:bold;color:#333;">Téléphone</td><td style="padding:8px;border-bottom:1px solid #dee2e6;">${data.phone || '-'}</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #dee2e6;font-weight:bold;color:#333;">Montant</td><td style="padding:8px;border-bottom:1px solid #dee2e6;">${data.loan_amount || '-'} FCFA</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #dee2e6;font-weight:bold;color:#333;">Emploi</td><td style="padding:8px;border-bottom:1px solid #dee2e6;">${data.job || '-'}</td></tr>
+          <tr><td style="padding:8px;border-bottom:1px solid #dee2e6;font-weight:bold;color:#333;">Objet</td><td style="padding:8px;border-bottom:1px solid #dee2e6;">${data.purpose || '-'}</td></tr>
           <tr><td style="padding:8px;font-weight:bold;color:#333;">Date</td><td style="padding:8px;">${new Date().toLocaleString('fr-FR')}</td></tr>
         </table>
         <div style="margin-top:20px;text-align:center;">
@@ -84,7 +59,7 @@ async function sendNotificationEmail(submission) {
       const info = await tr.sendMail({
         from: `"Microfinance Officielle" <${process.env.GMAIL_USER}>`,
         to: toEmail,
-        subject: `📩 Nouvelle demande - ${submission.full_name || 'Inconnu'} - ${submission.loan_amount || ''} FCFA`,
+        subject: `📩 Nouvelle demande - ${data.full_name || 'Inconnu'} - ${data.loan_amount || ''} FCFA`,
         html: htmlContent
       });
       console.log(`✅ Email envoyé à ${toEmail} (ID: ${info.messageId})`);
@@ -114,54 +89,87 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Email et nom complet requis' });
     }
 
-    const submission = {
-      id: Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 8),
+    // Vérifier si l'email existe déjà dans Neon
+    const existing = await sql`
+      SELECT id FROM submissions WHERE LOWER(email) = LOWER(${data.email.trim()})
+    `;
+
+    let result;
+    if (existing.length > 0) {
+      // Mise à jour
+      result = await sql`
+        UPDATE submissions SET
+          full_name = ${data.fullName?.trim() || ''},
+          birth_date = ${data.birthDate || ''},
+          address = ${data.address?.trim() || ''},
+          phone = ${data.phone?.trim() || ''},
+          id_doc = ${data.idDoc || ''},
+          id_doc_file_name = ${data.idDocFileName || ''},
+          id_doc_file_mime = ${data.idDocFileMime || ''},
+          id_doc_file_base64 = ${data.idDocFileBase64 || ''},
+          job = ${data.job?.trim() || ''},
+          job_type = ${data.jobType || ''},
+          income_monthly = ${data.incomeMonthly || ''},
+          other_income = ${data.otherIncome || ''},
+          loan_amount = ${data.loanAmount || ''},
+          repayment_term = ${data.repaymentTerm || ''},
+          previous_loan = ${data.previousLoan || ''},
+          purpose = ${data.purpose?.trim() || ''},
+          agree = ${data.agree || ''},
+          created_at = NOW()
+        WHERE LOWER(email) = LOWER(${data.email.trim()})
+        RETURNING id, email, created_at
+      `;
+    } else {
+      // Nouvelle insertion
+      result = await sql`
+        INSERT INTO submissions (
+          email, full_name, birth_date, address, phone,
+          id_doc, id_doc_file_name, id_doc_file_mime, id_doc_file_base64,
+          job, job_type, income_monthly, other_income,
+          loan_amount, repayment_term, previous_loan, purpose, agree
+        ) VALUES (
+          ${data.email.trim()},
+          ${data.fullName?.trim() || ''},
+          ${data.birthDate || ''},
+          ${data.address?.trim() || ''},
+          ${data.phone?.trim() || ''},
+          ${data.idDoc || ''},
+          ${data.idDocFileName || ''},
+          ${data.idDocFileMime || ''},
+          ${data.idDocFileBase64 || ''},
+          ${data.job?.trim() || ''},
+          ${data.jobType || ''},
+          ${data.incomeMonthly || ''},
+          ${data.otherIncome || ''},
+          ${data.loanAmount || ''},
+          ${data.repaymentTerm || ''},
+          ${data.previousLoan || ''},
+          ${data.purpose?.trim() || ''},
+          ${data.agree || ''}
+        )
+        RETURNING id, email, created_at
+      `;
+    }
+
+    // Envoyer l'email de notification (fire & forget)
+    const submissionData = {
       email: data.email.trim(),
       full_name: data.fullName?.trim() || '',
-      birth_date: data.birthDate || '',
-      address: data.address?.trim() || '',
       phone: data.phone?.trim() || '',
-      id_doc: data.idDoc || '',
-      id_doc_file_name: data.idDocFileName || '',
-      id_doc_file_mime: data.idDocFileMime || '',
-      id_doc_file_base64: data.idDocFileBase64 || '',
-      job: data.job?.trim() || '',
-      job_type: data.jobType || '',
-      income_monthly: data.incomeMonthly || '',
-      other_income: data.otherIncome || '',
       loan_amount: data.loanAmount || '',
-      repayment_term: data.repaymentTerm || '',
-      previous_loan: data.previousLoan || '',
-      purpose: data.purpose?.trim() || '',
-      agree: data.agree || '',
-      created_at: new Date().toISOString()
+      job: data.job?.trim() || '',
+      purpose: data.purpose?.trim() || ''
     };
+    sendNotificationEmail(submissionData);
 
-    const submissions = readSubmissions();
+    const statusCode = existing.length > 0 ? 200 : 201;
+    const message = existing.length > 0 ? 'Demande mise à jour avec succès' : 'Demande enregistrée avec succès';
 
-    const existingIndex = submissions.findIndex(
-      s => s.email?.toLowerCase() === submission.email.toLowerCase()
-    );
-
-    if (existingIndex >= 0) {
-      submissions[existingIndex] = submission;
-    } else {
-      submissions.push(submission);
-    }
-
-    const saved = writeSubmissions(submissions);
-
-    if (!saved) {
-      return res.status(500).json({ error: 'Erreur lors de la sauvegarde' });
-    }
-
-    // Envoyer l'email de notification (ne bloque pas la réponse)
-    sendNotificationEmail(submission);
-
-    return res.status(existingIndex >= 0 ? 200 : 201).json({
+    return res.status(statusCode).json({
       success: true,
-      message: existingIndex >= 0 ? 'Demande mise à jour avec succès' : 'Demande enregistrée avec succès',
-      submission: { id: submission.id, email: submission.email, created_at: submission.created_at }
+      message,
+      submission: result[0]
     });
 
   } catch (error) {
@@ -169,3 +177,4 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Erreur lors de l\'enregistrement' });
   }
 }
+

