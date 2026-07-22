@@ -312,26 +312,28 @@ function setPage(n){
 function validatePage(){
   const p=pages.find(p=>+p.dataset.page===currentPage);
   if(!p)return false;
-  for(const el of p.querySelectorAll('[required]')){
+  const fields=p.querySelectorAll('[required]');
+  for(let i=0;i<fields.length;i++){
+    const el=fields[i];
     if(el.type==='file'){
-      if(!(el.files||[]).length){
-        el.focus();
+      if(!el.files||!el.files.length){
+        toast('Fichier requis','Importez votre document d\'identité.','err');
         el.scrollIntoView({behavior:'smooth',block:'center'});
-        toast('Fichier requis','Importez votre document.','err');
         return false;
       }
     } else if(el.type==='checkbox'||el.type==='radio'){
       if(!el.checked){
-        el.focus();
-        el.scrollIntoView({behavior:'smooth',block:'center'});
         toast('Champ requis','Cochez la case obligatoire.','err');
+        el.scrollIntoView({behavior:'smooth',block:'center'});
         return false;
       }
-    } else if(!el.value||!el.value.trim()){
-      el.focus();
-      el.scrollIntoView({behavior:'smooth',block:'center'});
-      toast('Champ requis','Remplissez tous les champs.','err');
-      return false;
+    } else {
+      var val=el.value;
+      if(val===undefined||val===null||String(val).trim()===''){
+        toast('Champ requis','Veuillez remplir tous les champs obligatoires.','err');
+        el.scrollIntoView({behavior:'smooth',block:'center'});
+        return false;
+      }
     }
   }
   return true;
