@@ -1,5 +1,6 @@
 import sql from './db.js';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'microfinance-secret-key-change-in-production';
 
@@ -33,7 +34,6 @@ export default async function handler(req, res) {
     }
 
     const admin = admins[0];
-    const bcrypt = await import('bcryptjs');
     const valid = bcrypt.compareSync(password, admin.password_hash);
     if (!valid) {
       return res.status(401).json({ error: 'Identifiants incorrects' });
@@ -58,4 +58,3 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Erreur lors de la connexion' });
   }
 }
-

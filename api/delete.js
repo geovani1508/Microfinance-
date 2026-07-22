@@ -29,12 +29,13 @@ export default async function handler(req, res) {
       return res.status(401).json({ error: 'Token invalide ou expiré' });
     }
 
-    let body = {};
-    if (req.body && typeof req.body === 'object') {
-      body = req.body;
+    // Priorité à req.query.id (plus fiable sur Vercel pour DELETE)
+    let rawId = req.query?.id;
+    
+    // Fallback vers le body si présent
+    if (!rawId && req.body && typeof req.body === 'object') {
+      rawId = req.body.id;
     }
-
-    const rawId = body.id ?? req.query?.id;
 
     if (!rawId) {
       return res.status(400).json({ error: 'ID requis' });
@@ -57,4 +58,3 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Erreur lors de la suppression' });
   }
 }
-
