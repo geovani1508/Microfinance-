@@ -1,7 +1,21 @@
-import sql from './db.js';
+import fs from 'fs';
+import path from 'path';
 import jwt from 'jsonwebtoken';
 
+const DATA_FILE = path.resolve('/tmp', 'submissions.json');
 const JWT_SECRET = process.env.JWT_SECRET || 'microfinance-secret-key-change-in-production';
+
+function readSubmissions() {
+  try {
+    if (fs.existsSync(DATA_FILE)) {
+      const raw = fs.readFileSync(DATA_FILE, 'utf8');
+      return JSON.parse(raw);
+    }
+  } catch (err) {
+    console.error('Erreur lecture fichier:', err);
+  }
+  return [];
+}
 
 export default async function handler(req, res) {
   // CORS headers
@@ -25,9 +39,8 @@ export default async function handler(req, res) {
     }
 
     const token = authHeader.split(' ')[1];
-    let decoded;
     try {
-      decoded = jwt.verify(token, JWT_SECRET);
+      jwt.verify(token, JWT_SECRET);
     } catch {
       return res.status(401).json({ error: 'Token invalide ou expiré' });
     }
@@ -35,26 +48,33 @@ export default async function handler(req, res) {
     // Get filter from query params
     const filterEmail = req.query.email?.trim().toLowerCase() || '';
 
-    // Fetch submissions
-    let submissions;
+    // Read submissions from JSON file
+    const allSubmissions = readSubmissions();
+
+    // Sort by created_at DESC
+    allSubmissions.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+    // Filter by email if needed
+    let submissions = allSubmissions;
     if (filterEmail) {
-      submissions = await sql`
-        SELECT id, email, full_name, phone, loan_amount, created_at
-        FROM submissions
-        WHERE LOWER(email) LIKE ${'%' + filterEmail + '%'}
-        ORDER BY created_at DESC
-      `;
-    } else {
-      submissions = await sql`
-        SELECT id, email, full_name, phone, loan_amount, created_at
-        FROM submissions
-        ORDER BY created_at DESC
-      `;
+      submissions = allSubmissions.filter(s => 
+        s.email?.toLowerCase().includes(filterEmail)
+      );
     }
+
+    // Return only summary fields
+    const summary = submissions.map(s => ({
+      id: s.id,
+      email: s.email,
+      full_name: s.full_name,
+      phone: s.phone,
+      loan_amount: s.loan_amount,
+      created_at: s.created_at
+    }));
 
     return res.status(200).json({
       success: true,
-      submissions
+      submissions: summary
     });
 
   } catch (error) {

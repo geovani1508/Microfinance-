@@ -1,7 +1,21 @@
-import sql from '../db.js';
+import fs from 'fs';
+import path from 'path';
 import jwt from 'jsonwebtoken';
 
+const DATA_FILE = path.resolve('/tmp', 'submissions.json');
 const JWT_SECRET = process.env.JWT_SECRET || 'microfinance-secret-key-change-in-production';
+
+function readSubmissions() {
+  try {
+    if (fs.existsSync(DATA_FILE)) {
+      const raw = fs.readFileSync(DATA_FILE, 'utf8');
+      return JSON.parse(raw);
+    }
+  } catch (err) {
+    console.error('Erreur lecture fichier:', err);
+  }
+  return [];
+}
 
 export default async function handler(req, res) {
   // CORS headers
@@ -25,9 +39,8 @@ export default async function handler(req, res) {
     }
 
     const token = authHeader.split(' ')[1];
-    let decoded;
     try {
-      decoded = jwt.verify(token, JWT_SECRET);
+      jwt.verify(token, JWT_SECRET);
     } catch {
       return res.status(401).json({ error: 'Token invalide ou expiré' });
     }
@@ -38,18 +51,17 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'ID requis' });
     }
 
-    // Fetch single submission
-    const submissions = await sql`
-      SELECT * FROM submissions WHERE id = ${parseInt(id)}
-    `;
+    // Read submissions from JSON file
+    const submissions = readSubmissions();
+    const submission = submissions.find(s => s.id === id);
 
-    if (submissions.length === 0) {
+    if (!submission) {
       return res.status(404).json({ error: 'Soumission non trouvée' });
     }
 
     return res.status(200).json({
       success: true,
-      submission: submissions[0]
+      submission
     });
 
   } catch (error) {

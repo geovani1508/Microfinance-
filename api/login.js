@@ -1,9 +1,10 @@
-import sql from './db.js';
-import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import initDB from './init-db.js';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'microfinance-secret-key-change-in-production';
+
+// Administrateur unique (hardcodé)
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'wabogeovani02@gmail.com';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'VaNeLlE@20';
 
 export default async function handler(req, res) {
   // CORS headers
@@ -20,35 +21,20 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Initialize DB tables if needed
-    await initDB();
-
     const { email, password } = req.body;
 
     if (!email || !password) {
       return res.status(400).json({ error: 'Email et mot de passe requis' });
     }
 
-    // Find admin by email
-    const admins = await sql`
-      SELECT id, email, password_hash FROM admins WHERE LOWER(email) = LOWER(${email.trim()})
-    `;
-
-    if (admins.length === 0) {
+    // Vérifier les identifiants
+    if (email.trim().toLowerCase() !== ADMIN_EMAIL.toLowerCase() || password !== ADMIN_PASSWORD) {
       return res.status(401).json({ error: 'Identifiants incorrects' });
     }
 
-    const admin = admins[0];
-
-    // Compare password
-    const valid = await bcrypt.compare(password, admin.password_hash);
-    if (!valid) {
-      return res.status(401).json({ error: 'Identifiants incorrects' });
-    }
-
-    // Generate JWT token
+    // Générer le token JWT
     const token = jwt.sign(
-      { id: admin.id, email: admin.email },
+      { id: 1, email: ADMIN_EMAIL },
       JWT_SECRET,
       { expiresIn: '24h' }
     );
@@ -57,7 +43,7 @@ export default async function handler(req, res) {
       success: true,
       message: 'Connexion réussie',
       token,
-      admin: { email: admin.email }
+      admin: { email: ADMIN_EMAIL }
     });
 
   } catch (error) {
@@ -65,4 +51,3 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Erreur lors de la connexion' });
   }
 }
-
